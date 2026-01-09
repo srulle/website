@@ -16,7 +16,6 @@ import { FaqSection } from './components/faq-section'
 import { LandingFooter } from './components/footer'
 import { LandingThemeCustomizer } from './components/landing-theme-customizer'
 import { AboutSection } from './components/about-section'
-import GalerySection from './components/galery-section'
 
 export function LandingPageContent() {
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false)
@@ -29,7 +28,6 @@ export function LandingPageContent() {
       {/* Main Content */}
       <main>
         <HeroSection />
-        <GalerySection />
         <LogoCarousel />
         {/* <StatsSection /> */}
         <AboutSection />
