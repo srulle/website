@@ -39,7 +39,7 @@ export function HeroSection() {
           </h1>
 
           {/* Subheading */}
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+          <p className="mx-auto mb-10 max-w-2xl text-xl text-muted-foreground sm:text-2xl lg:text-3xl">
             "Melayani dengan sepenuh hati"
           </p>
 
@@ -60,7 +60,7 @@ export function HeroSection() {
           </div> */}
         </div>
 
-        <div className="mx-auto max-w-2xl text-center mb-16">
+        <div className="mx-auto max-w-2xl text-center mb-6">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
             Our Latest Creations
           </h2>

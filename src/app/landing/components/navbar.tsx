@@ -86,10 +86,18 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <Link href="https://shadcnstore.com" className="flex items-center space-x-2 cursor-pointer" target='_blank' rel="noopener noreferrer">
-            <Logo size={32} />
-            <span className="font-bold">
-              ShadcnStore
-            </span>
+            <Logo size={40} />
+            <div className="flex flex-col">
+  <span className="font-semibold text-sm leading-[1.15]">
+    Rumah Sakit Umum Daerah
+  </span>
+  <span className="font-bold text-sm leading-[1.15]">
+    H. Abdurrahman Sayoeti
+  </span>
+  <span className="text-[10px] italic leading-[1.15]">
+    Pemerintah kota jambi
+  </span>
+</div>
           </Link>
         </div>
 
@@ -151,9 +159,13 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
               <SheetHeader className="space-y-0 p-4 pb-2 border-b">
                 <div className="flex items-center gap-2">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Logo size={16} />
+                    <Logo size={20} />
                   </div>
-                  <SheetTitle className="text-lg font-semibold">ShadcnStore</SheetTitle>
+                  <SheetTitle className="text-lg font-semibold flex flex-col items-start leading-tight">
+                    <span>Rumah Sakit Umum Daerah</span>
+                    <span className="text-sm font-medium">H. Abdurrahman Sayoeti</span>
+                    <span className="text-xs italic">Pemerintah kota jambi</span>
+                  </SheetTitle>
                   <div className="ml-auto flex items-center gap-2">
                     <Button
                       variant="ghost"
