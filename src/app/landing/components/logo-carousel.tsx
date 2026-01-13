@@ -7,6 +7,7 @@ import { Marquee } from '@/components/ui/marquee'
 const companies = [
   { name: 'Berakhlak', src: '/logo/svg/berakhlak.svg' },
   { name: 'Kemenkes', src: '/logo/svg/kemenkes.svg' },
+  { name: 'Satusehat', src: '/logo/svg/satusehat.svg' },
 ] as const
 
 export function LogoCarousel() {
@@ -31,14 +32,9 @@ export function LogoCarousel() {
               {[...companies, ...companies, ...companies, ...companies].map((company, index) => (
                 <Card
                   key={index}
-                  className="flex-shrink-0 flex items-center justify-center h-16 w-48 opacity-60 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent mx-8"
+                  className="flex-shrink-0 flex items-center justify-center h-24 w-64 opacity-60 hover:opacity-100 transition-opacity duration-300 border-0 shadow-none bg-transparent mx-8"
                 >
-                  <div className="flex items-center gap-3">
-                    <img src={company.src} alt={company.name} className="h-7 w-auto" />
-                    <span className="text-foreground text-lg font-semibold whitespace-nowrap">
-                      {company.name}
-                    </span>
-                  </div>
+                  <img src={company.src} alt={company.name} className="h-12 w-auto" />
                 </Card>
               ))}
             </Marquee>
