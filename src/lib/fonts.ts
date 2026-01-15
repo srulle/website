@@ -1,6 +1,13 @@
-import { Inter } from 'next/font/google'
+import { Inter, Geist } from 'next/font/google'
 
-// Configure Inter font to match exactly what Next.js optimizes for
+// Configure Geist font as primary
+export const geist = Geist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-geist',
+})
+
+// Configure Inter font as secondary/fallback
 export const inter = Inter({
   subsets: ['latin'],
   display: 'swap',

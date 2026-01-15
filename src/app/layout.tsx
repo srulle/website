@@ -3,7 +3,7 @@ import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { SidebarConfigProvider } from "@/contexts/sidebar-context";
-import { inter } from "@/lib/fonts";
+import { inter, geist } from "@/lib/fonts";
 import SmoothScroll from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`}>
-      <body className={inter.className}>
+    <html lang="en" className={`${geist.variable} ${inter.variable} antialiased`}>
+      <body className={geist.className}>
         <SmoothScroll />
-        <ThemeProvider defaultTheme="system" storageKey="nextjs-ui-theme">
+        <ThemeProvider defaultTheme="light" storageKey="nextjs-ui-theme">
           <SidebarConfigProvider>
             {children}
           </SidebarConfigProvider>

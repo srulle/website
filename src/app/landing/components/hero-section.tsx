@@ -60,7 +60,7 @@ export function HeroSection() {
           </div> */}
         </div>
 
-        <div className="mx-auto max-w-2xl text-center mb-6">
+        <div className="mx-auto max-w-2xl text-center mb-6 mt-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
             Our Latest Creations
           </h2>
@@ -69,8 +69,8 @@ export function HeroSection() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6 h-[400px] w-full max-w-5xl mx-auto">
-          <div className="relative group flex-grow transition-all w-56 h-[400px] duration-500 hover:w-full">
+        <div className="flex items-center gap-6 h-[600px] w-full max-w-7xl mx-auto">
+          <div className="relative group flex-grow transition-all w-56 h-[600px] duration-500 hover:w-full">
             <img className="h-full w-full object-cover object-center"
               src="https://images.unsplash.com/photo-1543269865-0a740d43b90c?q=80&w=800&h=400&auto=format&fit=crop"
               alt="image" />
@@ -81,7 +81,7 @@ export function HeroSection() {
 
             </div>
           </div>
-          <div className="relative group flex-grow transition-all w-56 h-[400px] duration-500 hover:w-full">
+          <div className="relative group flex-grow transition-all w-56 h-[600px] duration-500 hover:w-full">
             <img className="h-full w-full object-cover object-right"
               src="https://images.unsplash.com/photo-1714976326351-0ecf0244f0fc?q=80&w=800&h=400&auto=format&fit=crop"
               alt="image" />
@@ -92,7 +92,7 @@ export function HeroSection() {
 
             </div>
           </div>
-          <div className="relative group flex-grow transition-all w-56 h-[400px] duration-500 hover:w-full">
+          <div className="relative group flex-grow transition-all w-56 h-[600px] duration-500 hover:w-full">
             <img className="h-full w-full object-cover object-center"
               src="https://images.unsplash.com/photo-1736220690062-79e12ca75262?q=80&w=800&h=400&auto=format&fit=crop"
               alt="image" />

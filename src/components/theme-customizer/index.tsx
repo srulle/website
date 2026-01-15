@@ -24,11 +24,78 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
   const { config: sidebarConfig, updateConfig: updateSidebarConfig } = useSidebarConfig()
 
   const [activeTab, setActiveTab] = React.useState("theme")
-  const [selectedTheme, setSelectedTheme] = React.useState("default")
-  const [selectedTweakcnTheme, setSelectedTweakcnTheme] = React.useState("")
-  const [selectedRadius, setSelectedRadius] = React.useState("0.5rem")
+  const [selectedTheme, setSelectedTheme] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("selectedTheme") || "default"
+    }
+    return "default"
+  })
+  const [selectedTweakcnTheme, setSelectedTweakcnTheme] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("selectedTweakcnTheme") || ""
+    }
+    return ""
+  })
+  const [selectedRadius, setSelectedRadius] = React.useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("selectedRadius") || "0.5rem"
+    }
+    return "0.5rem"
+  })
   const [importModalOpen, setImportModalOpen] = React.useState(false)
-  const [importedTheme, setImportedTheme] = React.useState<ImportedTheme | null>(null)
+  const [importedTheme, setImportedTheme] = React.useState<ImportedTheme | null>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("importedTheme")
+      return saved ? JSON.parse(saved) : null
+    }
+    return null
+  })
+
+  // Save to localStorage when values change
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selectedTheme", selectedTheme)
+    }
+  }, [selectedTheme])
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selectedTweakcnTheme", selectedTweakcnTheme)
+    }
+  }, [selectedTweakcnTheme])
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selectedRadius", selectedRadius)
+    }
+  }, [selectedRadius])
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (importedTheme) {
+        localStorage.setItem("importedTheme", JSON.stringify(importedTheme))
+      } else {
+        localStorage.removeItem("importedTheme")
+      }
+    }
+  }, [importedTheme])
+
+  // Apply saved theme on mount
+  React.useEffect(() => {
+    if (importedTheme) {
+      applyImportedTheme(importedTheme, isDarkMode)
+    } else if (selectedTheme && selectedTheme !== "default") {
+      applyTheme(selectedTheme, isDarkMode)
+    } else if (selectedTweakcnTheme) {
+      const selectedPreset = tweakcnThemes.find(t => t.value === selectedTweakcnTheme)?.preset
+      if (selectedPreset) {
+        applyTweakcnTheme(selectedPreset, isDarkMode)
+      }
+    }
+    if (selectedRadius !== "0.5rem") {
+      applyRadius(selectedRadius)
+    }
+  }, []) // Empty dependency array to run only on mount
 
   const handleReset = () => {
     // Complete reset to application defaults
@@ -40,13 +107,21 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
     setImportedTheme(null) // Clear imported theme
     setBrandColorsValues({}) // Clear brand colors state
 
-    // 2. Completely remove all custom CSS variables
+    // 2. Clear localStorage
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("selectedTheme")
+      localStorage.removeItem("selectedTweakcnTheme")
+      localStorage.removeItem("selectedRadius")
+      localStorage.removeItem("importedTheme")
+    }
+
+    // 3. Completely remove all custom CSS variables
     resetTheme()
 
-    // 3. Reset the radius to default
+    // 4. Reset the radius to default
     applyRadius("0.5rem")
 
-    // 4. Reset sidebar to defaults
+    // 5. Reset sidebar to defaults
     updateSidebarConfig({ variant: "inset", collapsible: "offcanvas", side: "left" })
   }
 
