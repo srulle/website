@@ -1,148 +1,109 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form"
 import { Logo } from '@/components/logo'
-import { Github, Twitter, Linkedin, Youtube, Heart } from 'lucide-react'
-
-const newsletterSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-})
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube, Heart } from 'lucide-react'
 
 const footerLinks = {
-  product: [
-    { name: 'Features', href: '#features' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'API', href: '#api' },
-    { name: 'Documentation', href: '#docs' },
+  layanan: [
+    { name: 'Rawat Jalan', href: '#rawat-jalan' },
+    { name: 'Rawat Inap', href: '#rawat-inap' },
+    { name: 'Gawat Darurat', href: '#gawat-darurat' },
+    { name: 'Laboratorium', href: '#laboratorium' },
   ],
-  company: [
-    { name: 'About', href: '#about' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Press', href: '#press' },
+  informasi: [
+    { name: 'Tentang Kami', href: '#about' },
+    { name: 'Dokter', href: '#team' },
+    { name: 'Berita', href: '#news' },
+    { name: 'Jadwal Dokter', href: '#jadwal-dokter' },
   ],
-  resources: [
-    { name: 'Help Center', href: '#help' },
-    { name: 'Community', href: '#community' },
-    { name: 'Guides', href: '#guides' },
-    { name: 'Webinars', href: '#webinars' },
+  pasien: [
+    { name: 'Cara Daftar', href: '#cara-daftar' },
+    { name: 'BPJS Kesehatan', href: '#bpjs' },
+    { name: 'Feedback', href: '#feedback' },
+    { name: 'Hubungi Kami', href: '#kontak' },
   ],
   legal: [
-    { name: 'Privacy', href: '#privacy' },
-    { name: 'Terms', href: '#terms' },
-    { name: 'Security', href: '#security' },
-    { name: 'Status', href: '#status' },
+    { name: 'Kebijakan Privasi', href: '#privacy' },
+    { name: 'Syarat & Ketentuan', href: '#terms' },
+    { name: 'Hak Pasien', href: '#hak-pasien' },
   ],
 }
 
 const socialLinks = [
-  { name: 'Twitter', href: '#', icon: Twitter },
-  { name: 'GitHub', href: 'https://github.com/silicondeck/shadcn-dashboard-landing-template', icon: Github },
-  { name: 'LinkedIn', href: '#', icon: Linkedin },
+  { name: 'Facebook', href: '#', icon: Facebook },
+  { name: 'Instagram', href: '#', icon: Instagram },
   { name: 'YouTube', href: '#', icon: Youtube },
 ]
 
+const contactInfo = [
+  { icon: MapPin, text: 'Jl. KH Hasan Anang, Kota Jambi, Jambi' },
+  { icon: Phone, text: '(0741) 123456' },
+  { icon: Mail, text: 'info@rsudhasjambi.go.id' },
+  { icon: Clock, text: 'Senin - Minggu: 24 Jam' },
+]
+
 export function LandingFooter() {
-  const form = useForm<z.infer<typeof newsletterSchema>>({
-    resolver: zodResolver(newsletterSchema),
-    defaultValues: {
-      email: "",
-    },
-  })
-
-  function onSubmit(values: z.infer<typeof newsletterSchema>) {
-    // Here you would typically send the email to your newsletter service
-    console.log(values)
-    // Show success message and reset form
-    form.reset()
-  }
-
   return (
     <footer className="border-t bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Newsletter Section */}
-        <div className="mb-16">
-          <div className="mx-auto max-w-2xl text-center">
-            <h3 className="text-2xl font-bold mb-4">Stay updated</h3>
-            <p className="text-muted-foreground mb-6">
-              Get the latest updates, articles, and resources sent to your inbox weekly.
-            </p>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 max-w-md mx-auto sm:flex-row">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem className="flex-1">
-                      <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="Enter your email"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="cursor-pointer">Subscribe</Button>
-              </form>
-            </Form>
-          </div>
-        </div>
-
         {/* Main Footer Content */}
         <div className="grid gap-8 grid-cols-4 lg:grid-cols-6">
           {/* Brand Column */}
           <div className="col-span-4 lg:col-span-2 max-w-2xl">
             <div className="flex items-center space-x-2 mb-4 max-lg:justify-center">
-              <a href="https://shadcnstore.com" target='_blank' className="flex items-center space-x-2 cursor-pointer">
-                <Logo size={32} />
-                <span className="font-bold text-xl">ShadcnStore</span>
+              <a href="#" className="flex items-center space-x-2 cursor-pointer">
+                <Logo size={24} />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-sm leading-[1.15]">
+                    Rumah Sakit Umum Daerah
+                  </span>
+                  <span className="font-bold text-sm leading-[1.15]">
+                    H. Abdurrahman Sayoeti
+                  </span>
+                </div>
               </a>
             </div>
             <p className="text-muted-foreground mb-6 max-lg:text-center max-lg:flex max-lg:justify-center">
-              Accelerating web development with curated blocks, templates, landing pages, and admin dashboards designed for modern developers.
+              RSUD H. Abdurrahman Sayoeti adalah rumah sakit umum tipe D milik Pemerintah Kota Jambi yang berkomitmen memberikan pelayanan kesehatan terbaik untuk masyarakat.
             </p>
+            
+            {/* Contact Info */}
+            <div className="space-y-3 mb-6">
+              {contactInfo.map((info, index) => (
+                <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground max-lg:justify-center">
+                  <info.icon className="h-4 w-4 text-primary" />
+                  <span>{info.text}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Social Links */}
             <div className="flex space-x-4 max-lg:justify-center">
               {socialLinks.map((social) => (
-                <Button key={social.name} variant="ghost" size="icon" asChild>
-                  <a
-                    href={social.href}
-                    aria-label={social.name}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <social.icon className="h-4 w-4" />
-                  </a>
-                </Button>
+                <a
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
               ))}
             </div>
           </div>
 
           {/* Links Columns */}
           <div className='max-md:col-span-2 lg:col-span-1'>
-            <h4 className="font-semibold mb-4">Product</h4>
+            <h4 className="font-semibold mb-4">Layanan</h4>
             <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
+              {footerLinks.layanan.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -152,13 +113,13 @@ export function LandingFooter() {
           </div>
 
           <div className='max-md:col-span-2 lg:col-span-1'>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <h4 className="font-semibold mb-4">Informasi</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.informasi.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -168,13 +129,13 @@ export function LandingFooter() {
           </div>
 
           <div className='max-md:col-span-2 lg:col-span-1'>
-            <h4 className="font-semibold mb-4">Resources</h4>
+            <h4 className="font-semibold mb-4">Pasien</h4>
             <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
+              {footerLinks.pasien.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -190,7 +151,7 @@ export function LandingFooter() {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -203,29 +164,18 @@ export function LandingFooter() {
         <Separator className="my-8" />
 
         {/* Bottom Footer */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-2">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-muted-foreground text-sm">
             <div className="flex items-center gap-1">
-              <span>Made with</span>
+              <span>Dengan</span>
               <Heart className="h-4 w-4 text-red-500 fill-current" />
-              <span>by</span>
-              <a href="https://shadcnstore.com" target='_blank' className="font-semibold text-foreground hover:text-primary transition-colors cursor-pointer">
-                ShadcnStore
-              </a>
+              <span>kami melayani masyarakat</span>
             </div>
-            <span className="hidden sm:inline">•</span>
-            <span>© {new Date().getFullYear()} for the developer community</span>
           </div>
-          <div className="flex items-center space-x-4 text-sm text-muted-foreground mt-4 md:mt-0">
-            <a href="#privacy" className="hover:text-foreground transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#terms" className="hover:text-foreground transition-colors">
-              Terms of Service
-            </a>
-            <a href="#cookies" className="hover:text-foreground transition-colors">
-              Cookie Policy
-            </a>
+          <div className="text-center lg:text-right">
+            <p className="text-muted-foreground text-sm">
+              © {new Date().getFullYear()} RSUD H. Abdurrahman Sayoeti. Pemerintah Kota Jambi.
+            </p>
           </div>
         </div>
       </div>

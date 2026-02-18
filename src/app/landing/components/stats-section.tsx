@@ -1,10 +1,10 @@
 "use client"
 
 import {
-  Package,
-  Download,
+  Stethoscope,
   Users,
-  Star
+  BedDouble,
+  Clock
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { DotPattern } from '@/components/dot-pattern'
@@ -12,28 +12,28 @@ import { DotPattern } from '@/components/dot-pattern'
 
 const stats = [
   {
-    icon: Package,
-    value: '500+',
-    label: 'Components',
-    description: 'Ready-to-use blocks'
-  },
-  {
-    icon: Download,
-    value: '25K+',
-    label: 'Downloads',
-    description: 'Trusted worldwide'
+    icon: Stethoscope,
+    value: '50+',
+    label: 'Tenaga Medis',
+    description: 'Dokter & perawat profesional'
   },
   {
     icon: Users,
     value: '10K+',
-    label: 'Developers',
-    description: 'Active community'
+    label: 'Pasien/Tahun',
+    description: 'Dipercaya masyarakat'
   },
   {
-    icon: Star,
-    value: '4.9',
-    label: 'Rating',
-    description: 'User satisfaction'
+    icon: BedDouble,
+    value: '100+',
+    label: 'Tempat Tidur',
+    description: 'Fasilitas rawat inap'
+  },
+  {
+    icon: Clock,
+    value: '24/7',
+    label: 'Pelayanan',
+    description: 'Gawat darurat tersedia'
   }
 ]
 

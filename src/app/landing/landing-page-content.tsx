@@ -8,14 +8,15 @@ import { StatsSection } from './components/stats-section'
 import { FeaturesSection } from './components/features-section'
 import { TeamSection } from './components/team-section'
 import { TestimonialsSection } from './components/testimonials-section'
-import { BlogSection } from './components/blog-section'
+import { NewsSection } from './components/news-section'
 import { PricingSection } from './components/pricing-section'
 import { CTASection } from './components/cta-section'
-import { ContactSection } from './components/contact-section'
+import { FeedbackSection } from './components/feedback-section'
 import { FaqSection } from './components/faq-section'
 import { LandingFooter } from './components/footer'
 import { LandingThemeCustomizer } from './components/landing-theme-customizer'
 import { AboutSection } from './components/about-section'
+import { ScrollToTop } from './components/scroll-to-top'
 
 export function LandingPageContent() {
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false)
@@ -24,25 +25,27 @@ export function LandingPageContent() {
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <LandingNavbar onThemeCustomizerClick={() => setThemeCustomizerOpen(true)} />
-
       {/* Main Content */}
-      <main>
+      <main className="flex flex-col">
         <HeroSection />
         <LogoCarousel />
-        {/* <StatsSection /> */}
         <AboutSection />
         {/* <FeaturesSection /> */}
+        <StatsSection />
         <TeamSection />
         {/* <PricingSection /> */}
         {/* <TestimonialsSection /> */}
-        <BlogSection />
-        {/* <FaqSection /> */}
-        {/* <CTASection /> */}
-        <ContactSection />
+        <NewsSection />
+        <FaqSection />
+        <CTASection />
+        <FeedbackSection />
       </main>
 
       {/* Footer */}
       <LandingFooter />
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
 
       {/* Theme Customizer */}
       <LandingThemeCustomizer open={themeCustomizerOpen} onOpenChange={setThemeCustomizerOpen} />

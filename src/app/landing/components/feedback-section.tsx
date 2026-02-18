@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -16,39 +15,43 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Mail } from 'lucide-react'
+import { MessageSquare } from 'lucide-react'
 
-const contactFormSchema = z.object({
+const feedbackFormSchema = z.object({
   firstName: z.string().min(2, {
-    message: "First name must be at least 2 characters.",
+    message: "Nama depan minimal 2 karakter.",
   }),
   lastName: z.string().min(2, {
-    message: "Last name must be at least 2 characters.",
+    message: "Nama belakang minimal 2 karakter.",
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: "Masukkan alamat email yang valid.",
+  }),
+  phone: z.string().min(10, {
+    message: "Nomor telepon minimal 10 digit.",
   }),
   subject: z.string().min(5, {
-    message: "Subject must be at least 5 characters.",
+    message: "Subjek minimal 5 karakter.",
   }),
   message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
+    message: "Pesan minimal 10 karakter.",
   }),
 })
 
-export function ContactSection() {
-  const form = useForm<z.infer<typeof contactFormSchema>>({
-    resolver: zodResolver(contactFormSchema),
+export function FeedbackSection() {
+  const form = useForm<z.infer<typeof feedbackFormSchema>>({
+    resolver: zodResolver(feedbackFormSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
+      phone: "",
       subject: "",
       message: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof contactFormSchema>) {
+  function onSubmit(values: z.infer<typeof feedbackFormSchema>) {
     // Here you would typically send the form data to your backend
     console.log(values)
     // You could also show a success message or redirect
@@ -56,25 +59,24 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="feedback" className="py-16 sm:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <Badge variant="outline" className="mb-4">Get In Touch</Badge>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Need help or have questions?
+            Kritik dan Saran
           </h2>
           <p className="text-lg text-muted-foreground">
-            Our team is here to help you get the most out of ShadcnStore. Send us a message and we'll get back to you.
+            Kami sangat menghargai kritik dan saran Anda untuk membantu kami meningkatkan kualitas pelayanan RSUD H. Abdurrahman Sayoeti. Silakan sampaikan pendapat Anda melalui formulir di bawah ini.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto">
-          {/* Contact Form */}
+          {/* Feedback Form */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Mail className="h-5 w-5" />
-                Send us a message
+                <MessageSquare className="h-5 w-5" />
+                Sampaikan Kritik dan Saran Anda
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -86,9 +88,9 @@ export function ContactSection() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First name</FormLabel>
+                          <FormLabel>Nama Depan</FormLabel>
                           <FormControl>
-                            <Input placeholder="John" {...field} />
+                            <Input placeholder="Masukkan nama depan" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -99,9 +101,37 @@ export function ContactSection() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last name</FormLabel>
+                          <FormLabel>Nama Belakang</FormLabel>
                           <FormControl>
-                            <Input placeholder="Doe" {...field} />
+                            <Input placeholder="Masukkan nama belakang" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="contoh@email.com" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nomor Telepon/WhatsApp</FormLabel>
+                          <FormControl>
+                            <Input type="tel" placeholder="08xxxxxxxxxx" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -110,25 +140,12 @@ export function ContactSection() {
                   </div>
                   <FormField
                     control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="john@example.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel>Subjek</FormLabel>
                         <FormControl>
-                          <Input placeholder="Component request, bug report, general inquiry..." {...field} />
+                          <Input placeholder="Subjek kritik atau saran Anda..." {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -139,10 +156,10 @@ export function ContactSection() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Message</FormLabel>
+                        <FormLabel>Pesan</FormLabel>
                         <FormControl>
                           <Textarea
-                            placeholder="Tell us how we can help you with ShadcnStore components..."
+                            placeholder="Tuliskan kritik atau saran Anda untuk meningkatkan pelayanan kami..."
                             rows={10}
                             className="min-h-50"
                             {...field}
@@ -153,7 +170,7 @@ export function ContactSection() {
                     )}
                   />
                   <Button type="submit" className="w-full cursor-pointer">
-                    Send Message
+                    Kirim
                   </Button>
                 </form>
               </Form>

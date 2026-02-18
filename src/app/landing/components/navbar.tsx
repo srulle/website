@@ -30,32 +30,31 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { useTheme } from '@/hooks/use-theme'
 
 const navigationItems = [
-  { name: 'Home', href: '#hero' },
-  { name: 'Features', href: '#features' },
-  { name: 'Solutions', href: '#features', hasMegaMenu: true },
-  { name: 'Team', href: '#team' },
-  { name: 'Pricing', href: '#pricing' },
-  { name: 'FAQ', href: '#faq' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Beranda', href: '#hero' },
+  { name: 'Tentang Kami', href: '#about' },
+  { name: 'Layanan', href: '#layanan', hasMegaMenu: true },
+  { name: 'Tim Medis', href: '#team' },
+  { name: 'Berita', href: '#news' },
+  { name: 'Feedback', href: '#feedback' },
 ]
 
-// Solutions menu items for mobile
-const solutionsItems = [
-  { title: 'Browse Products' },
-  { name: 'Free Blocks', href: '#free-blocks' },
-  { name: 'Premium Templates', href: '#premium-templates' },
-  { name: 'Admin Dashboards', href: '#admin-dashboards' },
-  { name: 'Landing Pages', href: '#landing-pages' },
-  { title: 'Categories' },
-  { name: 'E-commerce', href: '#ecommerce' },
-  { name: 'SaaS Dashboards', href: '#saas-dashboards' },
-  { name: 'Analytics', href: '#analytics' },
-  { name: 'Authentication', href: '#authentication' },
-  { title: 'Resources' },
-  { name: 'Documentation', href: '#docs' },
-  { name: 'Component Showcase', href: '#showcase' },
-  { name: 'GitHub Repository', href: '#github' },
-  { name: 'Design System', href: '#design-system' }
+// Layanan menu items for mobile
+const layananItems = [
+  { title: 'Layanan Unggulan' },
+  { name: 'Rawat Jalan', href: '#rawat-jalan' },
+  { name: 'Rawat Inap', href: '#rawat-inap' },
+  { name: 'Gawat Darurat', href: '#gawat-darurat' },
+  { name: 'Laboratorium', href: '#laboratorium' },
+  { title: 'Fasilitas' },
+  { name: 'Radiologi', href: '#radiologi' },
+  { name: 'Farmasi', href: '#farmasi' },
+  { name: 'ICU', href: '#icu' },
+  { name: 'Ruang Bersalin', href: '#ruang-bersalin' },
+  { title: 'Informasi Pasien' },
+  { name: 'Jadwal Dokter', href: '#jadwal-dokter' },
+  { name: 'Cara Daftar', href: '#cara-daftar' },
+  { name: 'BPJS Kesehatan', href: '#bpjs' },
+  { name: 'Hubungi Kami', href: '#kontak' }
 ]
 
 // Smooth scroll function
@@ -77,7 +76,7 @@ interface LandingNavbarProps {
 
 export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {}) {
   const [isOpen, setIsOpen] = useState(false)
-  const [solutionsOpen, setSolutionsOpen] = useState(false)
+  const [layananOpen, setLayananOpen] = useState(false)
   const { setTheme, theme } = useTheme()
 
   return (
@@ -85,7 +84,7 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <Link href="https://shadcnstore.com" className="flex items-center space-x-2 cursor-pointer" target='_blank' rel="noopener noreferrer">
+          <Link href="https://jambikota.go.id/" className="flex items-center space-x-2 cursor-pointer" target='_blank' rel="noopener noreferrer">
             <Logo size={40} />
             <div className="flex flex-col">
   <span className="font-semibold text-sm leading-[1.15]">
@@ -194,34 +193,34 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
                   {navigationItems.map((item) => (
                     <div key={item.name}>
                       {item.hasMegaMenu ? (
-                        <Collapsible open={solutionsOpen} onOpenChange={setSolutionsOpen}>
+                        <Collapsible open={layananOpen} onOpenChange={setLayananOpen}>
                           <CollapsibleTrigger className="flex items-center justify-between w-full px-4 py-3 text-base font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer">
                             {item.name}
-                            <ChevronDown className={`h-4 w-4 transition-transform ${solutionsOpen ? 'rotate-180' : ''}`} />
+                            <ChevronDown className={`h-4 w-4 transition-transform ${layananOpen ? 'rotate-180' : ''}`} />
                           </CollapsibleTrigger>
                           <CollapsibleContent className="pl-4 space-y-1">
-                            {solutionsItems.map((solution, index) => (
-                              solution.title ? (
+                            {layananItems.map((layanan, index) => (
+                              layanan.title ? (
                                 <div
                                   key={`title-${index}`}
                                   className="px-4 mt-5 py-2 text-xs font-semibold text-muted-foreground/50 uppercase tracking-wider"
                                 >
-                                  {solution.title}
+                                  {layanan.title}
                                 </div>
                               ) : (
                                 <a
-                                  key={solution.name}
-                                  href={solution.href}
+                                  key={layanan.name}
+                                  href={layanan.href}
                                   className="flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
                                   onClick={(e) => {
                                     setIsOpen(false)
-                                    if (solution.href?.startsWith('#')) {
+                                    if (layanan.href?.startsWith('#')) {
                                       e.preventDefault()
-                                      setTimeout(() => smoothScrollTo(solution.href), 100)
+                                      setTimeout(() => smoothScrollTo(layanan.href), 100)
                                     }
                                   }}
                                 >
-                                  {solution.name}
+                                  {layanan.name}
                                 </a>
                               )
                             ))}

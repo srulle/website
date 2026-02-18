@@ -1,104 +1,109 @@
 "use client"
 
 import {
-  Shield,
-  BarChart3,
-  Database,
-  Building2,
-  Rocket,
-  Settings,
-  Zap,
-  Package,
-  Layout,
-  Crown,
-  Palette
+  Stethoscope,
+  BedDouble,
+  Ambulance,
+  FlaskConical,
+  Scan,
+  Pill,
+  HeartPulse,
+  Baby,
+  Scissors,
+  Calendar,
+  ClipboardList,
+  CreditCard,
+  Users,
+  Phone,
+  Clock,
+  FileText
 } from 'lucide-react'
 
 const menuSections = [
   {
-    title: 'Browse Products',
+    title: 'Layanan Unggulan',
     items: [
       {
-        title: 'Free Blocks',
-        description: 'Essential UI components and sections',
-        icon: Package,
-        href: '#free-blocks'
+        title: 'Rawat Jalan',
+        description: 'Pelayanan poliklinik umum dan spesialis',
+        icon: Stethoscope,
+        href: '#rawat-jalan'
       },
       {
-        title: 'Premium Templates',
-        description: 'Complete page templates and layouts',
-        icon: Crown,
-        href: '#premium-templates'
+        title: 'Rawat Inap',
+        description: 'Perawatan dengan fasilitas ruangan nyaman',
+        icon: BedDouble,
+        href: '#rawat-inap'
       },
       {
-        title: 'Admin Dashboards',
-        description: 'Full-featured dashboard solutions',
-        icon: BarChart3,
-        href: '#admin-dashboards'
+        title: 'Gawat Darurat',
+        description: 'Layanan 24 jam untuk keadaan darurat',
+        icon: Ambulance,
+        href: '#gawat-darurat'
       },
       {
-        title: 'Landing Pages',
-        description: 'Marketing and product landing templates',
-        icon: Layout,
-        href: '#landing-pages'
+        title: 'Laboratorium',
+        description: 'Pemeriksaan lab lengkap dan akurat',
+        icon: FlaskConical,
+        href: '#laboratorium'
       }
     ]
   },
   {
-    title: 'Categories',
+    title: 'Fasilitas',
     items: [
       {
-        title: 'E-commerce',
-        description: 'Online store admin panels and components',
-        icon: Building2,
-        href: '#ecommerce'
+        title: 'Radiologi',
+        description: 'X-Ray, USG, dan pemeriksaan penunjang',
+        icon: Scan,
+        href: '#radiologi'
       },
       {
-        title: 'SaaS Dashboards',
-        description: 'Application admin interfaces',
-        icon: Rocket,
-        href: '#saas-dashboards'
+        title: 'Farmasi',
+        description: 'Layanan obat dan konsultasi farmasi',
+        icon: Pill,
+        href: '#farmasi'
       },
       {
-        title: 'Analytics',
-        description: 'Data visualization and reporting templates',
-        icon: BarChart3,
-        href: '#analytics'
+        title: 'ICU',
+        description: 'Unit perawatan intensif modern',
+        icon: HeartPulse,
+        href: '#icu'
       },
       {
-        title: 'Authentication',
-        description: 'Login, signup, and user management pages',
-        icon: Shield,
-        href: '#authentication'
+        title: 'Ruang Bersalin',
+        description: 'Fasilitas persalinan nyaman dan aman',
+        icon: Baby,
+        href: '#ruang-bersalin'
       }
     ]
   },
   {
-    title: 'Resources',
+    title: 'Informasi Pasien',
     items: [
       {
-        title: 'Documentation',
-        description: 'Integration guides and setup instructions',
-        icon: Database,
-        href: '#docs'
+        title: 'Jadwal Dokter',
+        description: 'Lihat jadwal praktik dokter spesialis',
+        icon: Calendar,
+        href: '#jadwal-dokter'
       },
       {
-        title: 'Component Showcase',
-        description: 'Interactive preview of all components',
-        icon: Palette,
-        href: '#showcase'
+        title: 'Cara Daftar',
+        description: 'Panduan pendaftaran pasien baru',
+        icon: ClipboardList,
+        href: '#cara-daftar'
       },
       {
-        title: 'GitHub Repository',
-        description: 'Open source foundation and community',
-        icon: Settings,
-        href: '#github'
+        title: 'BPJS Kesehatan',
+        description: 'Informasi layanan BPJS dan asuransi',
+        icon: CreditCard,
+        href: '#bpjs'
       },
       {
-        title: 'Design System',
-        description: 'shadcn/ui standards and customization',
-        icon: Zap,
-        href: '#design-system'
+        title: 'Hubungi Kami',
+        description: 'Nomor telepon dan alamat rumah sakit',
+        icon: Phone,
+        href: '#kontak'
       }
     ]
   }
@@ -121,7 +126,8 @@ export function MegaMenu() {
                 <a
                   key={item.title}
                   href={item.href}
-                  className="group block space-y-1 lg:space-y-2 hover:bg-accent rounded-md p-2 lg:p-3 -mx-2 lg:-mx-3 transition-colors my-0"
+                  onClick={(e) => e.preventDefault()}
+                  className="group block space-y-1 lg:space-y-2 hover:bg-accent rounded-md p-2 lg:p-3 -mx-2 lg:-mx-3 transition-colors my-0 cursor-pointer"
                 >
                   <div className="flex items-center gap-2 lg:gap-3">
                     <item.icon className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
