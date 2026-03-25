@@ -3,6 +3,44 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { CardDecorator } from '@/components/ui/card-decorator'
 import { User, Stethoscope, Building, Heart } from 'lucide-react'
+import { motion, type Variants } from 'framer-motion'
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
+}
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
+}
 
 const leaders = [
   {
@@ -36,35 +74,58 @@ export function AboutSection() {
     <section id="about" className="py-16 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mx-auto max-w-4xl text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+        <motion.div 
+          className="mx-auto max-w-4xl text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.h2 
+            className="text-3xl font-bold tracking-tight sm:text-4xl mb-4"
+            variants={itemVariants}
+          >
             Profil RSUD H. Abdurrahman Sayoeti
-          </h2>
-          <p className="text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground"
+            variants={itemVariants}
+          >
             RSUD H. Abdurrahman Sayoeti adalah rumah sakit umum tipe D milik Pemerintah Kota Jambi yang berlokasi di Jl. KH Hasan Anang, Kota Jambi. Rumah sakit ini berstatus Badan Layanan Umum Daerah (BLUD) dan dipimpin oleh dr. Hj. Ade Delpita, Sp.PK. RSUD ini fokus melayani kesehatan masyarakat, khususnya di wilayah sekitarnya.
-          </p>
-          <p className="text-lg text-muted-foreground mt-4">
+          </motion.p>
+          <motion.p 
+            className="text-lg text-muted-foreground mt-4"
+            variants={itemVariants}
+          >
             Dengan komitmen untuk memberikan pelayanan kesehatan yang berkualitas dan terjangkau, RSUD H. Abdurrahman Sayoeti terus berupaya meningkatkan fasilitas dan kompetensi tenaga medis. Rumah sakit ini melayani berbagai jenis pelayanan kesehatan termasuk rawat jalan, rawat inap, dan pelayanan gawat darurat dan lainnya.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Leadership Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mb-12">
+        <motion.div 
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mb-12"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {leaders.map((leader, index) => (
-            <Card key={index} className='group shadow-xs py-2'>
-              <CardContent className='p-8'>
-                <div className='flex flex-col items-center text-center'>
-                  <CardDecorator>
-                    <leader.icon className='h-6 w-6' aria-hidden />
-                  </CardDecorator>
-                  <h3 className='mt-6 font-medium text-balance'>{leader.title}</h3>
-                  <p className='font-semibold text-primary mt-2'>{leader.name}</p>
-                  <p className='text-muted-foreground mt-3 text-sm'>{leader.description}</p>
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div key={index} variants={cardVariants}>
+              <Card className='group shadow-xs py-2 h-full'>
+                <CardContent className='p-8'>
+                  <div className='flex flex-col items-center text-center'>
+                    <CardDecorator>
+                      <leader.icon className='h-6 w-6' aria-hidden />
+                    </CardDecorator>
+                    <h3 className='mt-6 font-medium text-balance'>{leader.title}</h3>
+                    <p className='font-semibold text-primary mt-2'>{leader.name}</p>
+                    <p className='text-muted-foreground mt-3 text-sm'>{leader.description}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

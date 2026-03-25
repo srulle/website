@@ -16,6 +16,43 @@ import {
   CarouselDots,
   type CarouselApi
 } from '@/components/ui/carousel'
+import { motion, type Variants } from 'framer-motion'
+
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
+  }
+}
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
+}
+
+const scaleVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1]
+    }
+  }
+}
 
 const carouselImages = [
   {
@@ -90,9 +127,17 @@ export function HeroSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="mx-auto max-w-4xl text-center">
+        <motion.div 
+          className="mx-auto max-w-4xl text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Announcement Badge */}
-          <div className="mb-6 sm:mb-8 flex justify-center">
+          <motion.div 
+            className="mb-6 sm:mb-8 flex justify-center"
+            variants={itemVariants}
+          >
             <Link href="https://jambikota.go.id/" target="_blank" rel="noopener noreferrer">
               <Badge variant="outline" className="px-4 py-2 border-foreground">
                 <Star className="w-3 h-3 mr-2 fill-current" />
@@ -100,35 +145,51 @@ export function HeroSection() {
                 <ArrowRight className="w-3 h-3 ml-2" />
               </Badge>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Main Headline */}
-          <h1 className="mb-4 sm:mb-6 text-2xl sm:text-4xl lg:text-7xl font-bold tracking-tight">
+          <motion.h1 
+            className="mb-4 sm:mb-6 text-2xl sm:text-4xl lg:text-7xl font-bold tracking-tight"
+            variants={itemVariants}
+          >
             RSUD
             <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               {" "}H. Abdurrahman Sayoeti{" "}
             </span>
             Kota Jambi
-          </h1>
+          </motion.h1>
 
           {/* Subheading */}
-          <p className="mx-auto mb-8 sm:mb-10 max-w-2xl text-base sm:text-xl lg:text-2xl text-muted-foreground">
+          <motion.p 
+            className="mx-auto mb-8 sm:mb-10 max-w-2xl text-base sm:text-xl lg:text-2xl text-muted-foreground"
+            variants={itemVariants}
+          >
             "Melayani dengan sepenuh hati"
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mx-auto max-w-2xl text-center mt-8 sm:mt-10 mb-6 sm:mb-8">
+        <motion.div 
+          className="mx-auto max-w-2xl text-center mt-8 sm:mt-10 mb-6 sm:mb-8"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.5 }}
+        >
           <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-2 sm:mb-4">
             Our Latest Creations
           </h2>
           <p className="text-sm sm:text-lg text-muted-foreground">
             A visual collection of our most recent works - each piece crafted with intention, emotion, and style.
           </p>
-        </div>
+        </motion.div>
 
         {/* Carousel Component */}
-        <div 
+        <motion.div 
           className="w-full max-w-7xl mx-auto"
+          variants={scaleVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.7 }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -212,7 +273,7 @@ export function HeroSection() {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

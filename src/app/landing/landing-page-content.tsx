@@ -28,6 +28,7 @@ export function LandingPageContent() {
       {/* Main Content */}
       <main className="flex flex-col">
         <HeroSection />
+        <CTASection />
         <LogoCarousel />
         <AboutSection />
         {/* <FeaturesSection /> */}
@@ -37,7 +38,6 @@ export function LandingPageContent() {
         {/* <TestimonialsSection /> */}
         <NewsSection />
         <FaqSection />
-        <CTASection />
         <FeedbackSection />
       </main>
 

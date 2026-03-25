@@ -1,7 +1,6 @@
 "use client"
 
-import { CircleHelp } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { CircleHelp, MessageCircle, Facebook, Instagram, Music2 } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Badge } from '@/components/ui/badge'
 
@@ -94,7 +93,7 @@ const FaqSection = () => {
         <div className="max-w-4xl mx-auto">
           <div className='bg-transparent'>
             <div className='p-0'>
-              <Accordion type='single' collapsible className='space-y-5'>
+              <Accordion type='single' collapsible className='space-y-1'>
                 {faqItems.map(item => (
                   <AccordionItem key={item.value} value={item.value} className='rounded-md !border bg-transparent'>
                     <AccordionTrigger className='cursor-pointer items-center gap-4 rounded-none bg-transparent py-2 ps-3 pe-4 hover:no-underline data-[state=open]:border-b'>
@@ -115,13 +114,46 @@ const FaqSection = () => {
           {/* Contact Support CTA */}
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">
-              Masih ada pertanyaan? Kami siap membantu Anda.
+              Masih ada pertanyaan? Hubungi kami di:
             </p>
-            <Button className='cursor-pointer' asChild>
-              <a href="#feedback">
-                Hubungi Kami
+            <div className="flex items-center justify-center gap-6">
+              <a 
+                href="https://wa.me/6281234567890" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="WhatsApp"
+              >
+                <MessageCircle className="h-6 w-6" />
               </a>
-            </Button>
+              <a 
+                href="https://facebook.com/rsudhasjambi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://instagram.com/rsudhasjambi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://tiktok.com/@rsudhasjambi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="TikTok"
+              >
+                <Music2 className="h-6 w-6" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

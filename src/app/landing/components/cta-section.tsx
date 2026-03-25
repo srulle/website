@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 
 export function CTASection() {
   return (
-    <section className='py-16 lg:py-24 bg-muted/80'>
+    <section className='py-16 lg:py-16 bg-muted/80'>
       <div className='container mx-auto px-4 lg:px-8'>
         <div className='mx-auto max-w-4xl'>
           <div className='text-center'>
@@ -61,9 +61,9 @@ export function CTASection() {
                 </Button>
                 <Button variant='outline' size='lg' className='cursor-pointer px-8 py-6 text-lg font-medium group' asChild>
                   <a href='#jadwal-dokter'>
-                    <ArrowRight className='me-2 size-5' />
+                    {/* <ArrowRight className='me-2 size-5' /> */}
                     Jadwal Dokter
-                    <ArrowRight className='ms-2 size-4 transition-transform group-hover:translate-x-1' />
+                    <ArrowRight className='ms-2 size-5 transition-transform group-hover:translate-x-1' />
                   </a>
                 </Button>
               </div>

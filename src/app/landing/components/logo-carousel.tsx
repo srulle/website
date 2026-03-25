@@ -45,7 +45,7 @@ export function LogoCarousel() {
   const companies = [...logos, ...logos, ...logos, ...logos] // Duplicate for smoother scrolling
 
   return (
-    <section className="flex items-center py-8 sm:py-8">
+    <section className="flex items-center py-16 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Top Border with Faded Gradient Edges */}
         <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-border to-transparent" />
