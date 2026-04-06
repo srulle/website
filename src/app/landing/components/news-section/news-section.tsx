@@ -1,39 +1,11 @@
 "use client"
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-
-const news = [
-  {
-    id: 1,
-    image: 'https://ui.shadcn.com/placeholder.svg',
-    category: 'Pelayanan',
-    title: 'RSUD H. Abdurrahman Sayoeti Gelar Layanan Vaksinasi Gratis untuk Masyarakat',
-    description:
-      'Rumah sakit mengadakan program vaksinasi gratis bagi masyarakat sekitar dalam rangka meningkatkan kekebalan tubuh dan mencegah penyebaran penyakit menular.',
-    date: '15 Februari 2026',
-  },
-  {
-    id: 2,
-    image: 'https://ui.shadcn.com/placeholder.svg',
-    category: 'Penghargaan',
-    title: 'RSUD H. Abdurrahman Sayoeti Raih Akreditasi Paripurna dari KARS',
-    description:
-      'Pencapaian prestisius ini menandai komitmen rumah sakit dalam memberikan pelayanan kesehatan berkualitas sesuai standar nasional.',
-    date: '10 Februari 2026',
-  },
-  {
-    id: 3,
-    image: 'https://ui.shadcn.com/placeholder.svg',
-    category: 'Kegiatan',
-    title: 'Penyuluhan Kesehatan: Pentingnya Deteksi Dini Penyakit Tidak Menular',
-    description:
-      'Tim medis RSUD menyelenggarakan penyuluhan kesehatan tentang pencegahan dan deteksi dini penyakit tidak menular seperti diabetes dan hipertensi.',
-    date: '5 Februari 2026',
-  },
-]
+import { news } from '@/lib/news-data'
 
 export function NewsSection() {
   return (
@@ -82,14 +54,13 @@ export function NewsSection() {
                     <h3 className="text-lg font-bold hover:text-primary transition-colors line-clamp-2">{item.title}</h3>
                   </a>
                   <p className="text-muted-foreground text-sm line-clamp-3">{item.description}</p>
-                  <a
-                    href="#"
-                    onClick={e => e.preventDefault()}
+                  <Link
+                    href={`/landing/news/${item.id}`}
                     className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer text-sm"
                   >
                     Baca Selengkapnya
                     <ArrowRight className="size-4" />
-                  </a>
+                  </Link>
                 </div>
               </CardContent>
             </Card>
