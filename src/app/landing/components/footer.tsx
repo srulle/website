@@ -9,13 +9,20 @@ const footerLinks = {
     { name: 'Rawat Jalan', href: '#rawat-jalan' },
     { name: 'Rawat Inap', href: '#rawat-inap' },
     { name: 'Gawat Darurat', href: '#gawat-darurat' },
+  ],
+  fasilitas: [
+    { name: 'Radiologi', href: '#radiologi' },
     { name: 'Laboratorium', href: '#laboratorium' },
+    { name: 'Farmasi', href: '#farmasi' },
+    { name: 'ICU', href: '#icu' },
   ],
   informasi: [
     { name: 'Tentang Kami', href: '#about' },
     { name: 'Dokter', href: '#team' },
     { name: 'Berita', href: '#news' },
     { name: 'Jadwal Dokter', href: '#jadwal-dokter' },
+    { name: 'Alur Pelayanan', href: '#alur-pelayanan' },
+    { name: 'Informasi Tempat Tidur', href: '#tempat-tidur' },
   ],
   pasien: [
     { name: 'Cara Daftar', href: '#cara-daftar' },

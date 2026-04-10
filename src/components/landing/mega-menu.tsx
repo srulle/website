@@ -40,12 +40,6 @@ const menuSections = [
         description: 'Layanan 24 jam untuk keadaan darurat',
         icon: Ambulance,
         href: '#gawat-darurat'
-      },
-      {
-        title: 'Laboratorium',
-        description: 'Pemeriksaan lab lengkap dan akurat',
-        icon: FlaskConical,
-        href: '#laboratorium'
       }
     ]
   },
@@ -57,6 +51,12 @@ const menuSections = [
         description: 'X-Ray, USG, dan pemeriksaan penunjang',
         icon: Scan,
         href: '#radiologi'
+      },
+      {
+        title: 'Laboratorium',
+        description: 'Pemeriksaan lab lengkap dan akurat',
+        icon: FlaskConical,
+        href: '#laboratorium'
       },
       {
         title: 'Farmasi',
@@ -86,6 +86,18 @@ const menuSections = [
         description: 'Lihat jadwal praktik dokter spesialis',
         icon: Calendar,
         href: '#jadwal-dokter'
+      },
+      {
+        title: 'Alur Pelayanan',
+        description: 'Panduan langkah pelayanan di rumah sakit',
+        icon: FileText,
+        href: '#alur-pelayanan'
+      },
+      {
+        title: 'Informasi Tempat Tidur',
+        description: 'Ketersediaan tempat tidur rawat inap',
+        icon: BedDouble,
+        href: '#tempat-tidur'
       },
       {
         title: 'Cara Daftar',
