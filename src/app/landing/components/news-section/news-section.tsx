@@ -46,13 +46,12 @@ export function NewsSection() {
                       {item.date}
                     </p>
                   </div>
-                  <a
-                    href="#"
-                    onClick={e => e.preventDefault()}
+                  <Link
+                    href={`/landing/news/${item.id}`}
                     className="cursor-pointer"
                   >
                     <h3 className="text-lg font-bold hover:text-primary transition-colors line-clamp-2">{item.title}</h3>
-                  </a>
+                  </Link>
                   <p className="text-muted-foreground text-sm line-clamp-3">{item.description}</p>
                   <Link
                     href={`/landing/news/${item.id}`}

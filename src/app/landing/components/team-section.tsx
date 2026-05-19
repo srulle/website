@@ -273,13 +273,19 @@ export function TeamSection() {
           {visibleDoctors.map((doctor) => (
             <Card key={doctor.id} className="shadow-xs overflow-hidden group relative h-80 cursor-default">
               {/* Full background image */}
-              <Image 
-                src={doctor.image} 
-                alt={doctor.name}
-                fill
-                className="object-contain object-top transition-transform duration-300 group-hover:scale-125 group-active:scale-125 origin-top bg-muted/30"
-                sizes="(max-width: 768px) 100vw, 25vw"
-              />
+              {doctor.image === '/image/default.png' ? (
+                <div className="flex items-center justify-center h-full">
+                  <UserRound className="h-44 w-44 text-muted-foreground opacity-60" />
+                </div>
+              ) : (
+                <Image 
+                  src={doctor.image} 
+                  alt={doctor.name}
+                  fill
+                  className="object-contain object-top transition-transform duration-300 group-hover:scale-125 group-active:scale-125 origin-top bg-muted/30"
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                />
+              )}
               
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />

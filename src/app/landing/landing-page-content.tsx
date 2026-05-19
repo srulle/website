@@ -21,6 +21,23 @@ import { ScrollToTop } from './components/scroll-to-top'
 export function LandingPageContent() {
   const [themeCustomizerOpen, setThemeCustomizerOpen] = React.useState(false)
 
+  // Scroll to hash on mount (when navigating from other pages with a hash in the URL)
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const hash = window.location.hash
+    if (hash) {
+      // Wait for content to render before scrolling
+      const timer = setTimeout(() => {
+        const el = document.querySelector(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}

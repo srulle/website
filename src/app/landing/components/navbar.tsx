@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/collapsible'
 import { Logo } from '@/components/logo'
 import { MegaMenu } from '@/components/landing/mega-menu'
+import { NavAnchor } from '@/components/landing/nav-anchor'
 import { ModeToggle } from '@/components/mode-toggle'
 import { useTheme } from '@/hooks/use-theme'
 
@@ -41,22 +42,22 @@ const navigationItems = [
 // Layanan menu items for mobile
 const layananItems = [
   { title: 'Layanan Unggulan' },
-  { name: 'Rawat Jalan', href: '#rawat-jalan' },
-  { name: 'Rawat Inap', href: '#rawat-inap' },
-  { name: 'Gawat Darurat', href: '#gawat-darurat' },
+  { name: 'Rawat Jalan', href: '/landing/layanan/rawat-jalan' },
+  { name: 'Rawat Inap', href: '/landing/layanan/rawat-inap' },
+  { name: 'Gawat Darurat', href: '/landing/layanan/gawat-darurat' },
   { title: 'Fasilitas' },
-  { name: 'Radiologi', href: '#radiologi' },
-  { name: 'Laboratorium', href: '#laboratorium' },
-  { name: 'Farmasi', href: '#farmasi' },
-  { name: 'ICU', href: '#icu' },
-  { name: 'Ruang Bersalin', href: '#ruang-bersalin' },
+  { name: 'Radiologi', href: '/landing/layanan/radiologi' },
+  { name: 'Laboratorium', href: '/landing/layanan/laboratorium' },
+  { name: 'Farmasi', href: '/landing/layanan/farmasi' },
+  { name: 'ICU', href: '/landing/layanan/icu' },
+  { name: 'Ruang Bersalin', href: '/landing/layanan/ruang-bersalin' },
   { title: 'Informasi Pasien' },
-  { name: 'Jadwal Dokter', href: '#jadwal-dokter' },
-  { name: 'Alur Pelayanan', href: '#alur-pelayanan' },
-  { name: 'Informasi Tempat Tidur', href: '#tempat-tidur' },
-  { name: 'Cara Daftar', href: '#cara-daftar' },
-  { name: 'BPJS Kesehatan', href: '#bpjs' },
-  { name: 'Hubungi Kami', href: '#kontak' }
+  { name: 'Jadwal Dokter', href: '/landing/#team' },
+  { name: 'Alur Pelayanan', href: '/landing/#alur-pelayanan' },
+  { name: 'Informasi Tempat Tidur', href: '/landing/#tempat-tidur' },
+  { name: 'Cara Daftar', href: '/landing/#cara-daftar' },
+  { name: 'BPJS Kesehatan', href: '/landing/#bpjs' },
+  { name: 'Hubungi Kami', href: '/landing/#kontak' }
 ]
 
 // Smooth scroll function
@@ -86,7 +87,7 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <Link href="https://jambikota.go.id/" className="flex items-center space-x-2 cursor-pointer" target='_blank' rel="noopener noreferrer">
+          <Link href="/landing" className="flex items-center space-x-2 cursor-pointer">
             <div className="xl:hidden">
               <Logo size={34} />
             </div>
@@ -124,16 +125,9 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
                 ) : (
                   <NavigationMenuLink
                     className="group inline-flex h-10 w-max items-center justify-center px-4 py-2 text-sm font-medium transition-colors hover:text-primary focus:text-primary focus:outline-none cursor-pointer"
-                    onClick={(e: React.MouseEvent) => {
-                      e.preventDefault()
-                      if (item.href.startsWith('#')) {
-                        smoothScrollTo(item.href)
-                      } else {
-                        window.location.href = item.href
-                      }
-                    }}
+                    asChild
                   >
-                    {item.name}
+                    <NavAnchor href={item.href}>{item.name}</NavAnchor>
                   </NavigationMenuLink>
                 )}
               </NavigationMenuItem>
@@ -211,39 +205,39 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
                                   {layanan.title}
                                 </div>
                               ) : (
-                                <a
+                                <Link
                                   key={layanan.name}
                                   href={layanan.href}
                                   className="flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
                                   onClick={(e) => {
                                     setIsOpen(false)
-                                    if (layanan.href?.startsWith('#')) {
+                                    if (layanan.href.startsWith('#')) {
                                       e.preventDefault()
                                       setTimeout(() => smoothScrollTo(layanan.href), 100)
                                     }
                                   }}
                                 >
                                   {layanan.name}
-                                </a>
+                                </Link>
                               )
                             ))}
                           </CollapsibleContent>
-                        </Collapsible>
-                      ) : (
-                        <a
-                          href={item.href}
-                          className="flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
-                          onClick={(e) => {
-                            setIsOpen(false)
-                            if (item.href.startsWith('#')) {
-                              e.preventDefault()
-                              setTimeout(() => smoothScrollTo(item.href), 100)
-                            }
-                          }}
-                        >
-                          {item.name}
-                        </a>
-                      )}
+                          </Collapsible>
+                        ) : (
+                          <Link
+                            href={item.href}
+                            className="flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
+                            onClick={(e) => {
+                              setIsOpen(false)
+                              if (item.href.startsWith('#')) {
+                                e.preventDefault()
+                                setTimeout(() => smoothScrollTo(item.href), 100)
+                              }
+                            }}
+                          >
+                            {item.name}
+                          </Link>
+                        )}
                     </div>
                   ))}
                 </nav>
