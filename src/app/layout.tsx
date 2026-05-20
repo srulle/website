@@ -3,7 +3,6 @@ import "./globals.css";
 
 import NextTopLoader from "nextjs-toploader";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarConfigProvider } from "@/contexts/sidebar-context";
 import { inter, geist } from "@/lib/fonts";
 import SmoothScroll from "@/components/smooth-scroll";
 
@@ -30,9 +29,7 @@ export default function RootLayout({
         />
         <SmoothScroll />
         <ThemeProvider defaultTheme="light" storageKey="nextjs-ui-theme">
-          <SidebarConfigProvider>
-            {children}
-          </SidebarConfigProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>
