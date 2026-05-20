@@ -23,7 +23,7 @@ export default function RootLayout({
           color="#2299DD"
           height={3}
           crawl={true}
-          showSpinner={true}
+          showSpinner={false}
           showForHashAnchor={false}
           zIndex={1600}
         />
