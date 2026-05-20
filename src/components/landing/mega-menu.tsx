@@ -79,48 +79,42 @@ const menuSections = [
           }
         ]
   },
-  {
+{
     title: 'Informasi Pasien',
     items: [
       {
         title: 'Jadwal Dokter',
         description: 'Lihat jadwal praktik dokter spesialis',
         icon: Calendar,
-        href: '#jadwal-dokter'
+        href: '/landing/informasi/jadwal-dokter'
       },
       {
         title: 'Alur Pelayanan',
         description: 'Panduan langkah pelayanan di rumah sakit',
         icon: FileText,
-        href: '#alur-pelayanan'
+        href: '/landing/informasi/alur-pelayanan'
       },
       {
         title: 'Informasi Tempat Tidur',
         description: 'Ketersediaan tempat tidur rawat inap',
         icon: BedDouble,
-        href: '#tempat-tidur'
+        href: '/landing/informasi/tempat-tidur'
       },
       {
         title: 'Cara Daftar',
         description: 'Panduan pendaftaran pasien baru',
         icon: ClipboardList,
-        href: '#cara-daftar'
+        href: '/landing/informasi/cara-daftar'
       },
       {
         title: 'BPJS Kesehatan',
         description: 'Informasi layanan BPJS dan asuransi',
         icon: CreditCard,
-        href: '#bpjs'
+        href: '/landing/informasi/bpjs'
       },
-      {
-        title: 'Hubungi Kami',
-        description: 'Nomor telepon dan alamat rumah sakit',
-        icon: Phone,
-        href: '#kontak'
-      }
-    ]
-  }
 ]
+    }
+ ]
 
 export function MegaMenu() {
   return (

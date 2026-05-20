@@ -11,18 +11,20 @@ const footerLinks = {
     { name: 'Gawat Darurat', href: '#gawat-darurat' },
   ],
   fasilitas: [
-    { name: 'Radiologi', href: '#radiologi' },
-    { name: 'Laboratorium', href: '#laboratorium' },
-    { name: 'Farmasi', href: '#farmasi' },
-    { name: 'ICU', href: '#icu' },
+    { name: 'Radiologi', href: '/landing/layanan/radiologi' },
+    { name: 'Laboratorium', href: '/landing/layanan/laboratorium' },
+    { name: 'Farmasi', href: '/landing/layanan/farmasi' },
+    { name: 'ICU', href: '/landing/layanan/icu' },
   ],
-  informasi: [
+informasi: [
     { name: 'Tentang Kami', href: '#about' },
     { name: 'Dokter', href: '#team' },
     { name: 'Berita', href: '#news' },
-    { name: 'Jadwal Dokter', href: '#jadwal-dokter' },
-    { name: 'Alur Pelayanan', href: '#alur-pelayanan' },
-    { name: 'Informasi Tempat Tidur', href: '#tempat-tidur' },
+    { name: 'Jadwal Dokter', href: '/landing/informasi/jadwal-dokter' },
+    { name: 'Alur Pelayanan', href: '/landing/informasi/alur-pelayanan' },
+    { name: 'Informasi Tempat Tidur', href: '/landing/informasi/tempat-tidur' },
+    { name: 'Cara Daftar', href: '/landing/informasi/cara-daftar' },
+    { name: 'BPJS Kesehatan', href: '/landing/informasi/bpjs' },
   ],
   pasien: [
     { name: 'Cara Daftar', href: '#cara-daftar' },

@@ -52,12 +52,11 @@ const layananItems = [
   { name: 'ICU', href: '/landing/layanan/icu' },
   { name: 'Ruang Bersalin', href: '/landing/layanan/ruang-bersalin' },
   { title: 'Informasi Pasien' },
-  { name: 'Jadwal Dokter', href: '/landing/#team' },
-  { name: 'Alur Pelayanan', href: '/landing/#alur-pelayanan' },
-  { name: 'Informasi Tempat Tidur', href: '/landing/#tempat-tidur' },
-  { name: 'Cara Daftar', href: '/landing/#cara-daftar' },
-  { name: 'BPJS Kesehatan', href: '/landing/#bpjs' },
-  { name: 'Hubungi Kami', href: '/landing/#kontak' }
+  { name: 'Jadwal Dokter', href: '/landing/informasi/jadwal-dokter' },
+  { name: 'Alur Pelayanan', href: '/landing/informasi/alur-pelayanan' },
+  { name: 'Informasi Tempat Tidur', href: '/landing/informasi/tempat-tidur' },
+  { name: 'Cara Daftar', href: '/landing/informasi/cara-daftar' },
+  { name: 'BPJS Kesehatan', href: '/landing/informasi/bpjs' },
 ]
 
 // Smooth scroll function
@@ -204,16 +203,16 @@ export function LandingNavbar({ onThemeCustomizerClick }: LandingNavbarProps = {
                                 >
                                   {layanan.title}
                                 </div>
-                              ) : (
+                              ) : layanan.href && (
                                 <Link
                                   key={layanan.name}
                                   href={layanan.href}
                                   className="flex items-center px-4 py-2 text-sm rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer"
                                   onClick={(e) => {
                                     setIsOpen(false)
-                                    if (layanan.href.startsWith('#')) {
+                                    if (layanan.href && layanan.href.startsWith('#')) {
                                       e.preventDefault()
-                                      setTimeout(() => smoothScrollTo(layanan.href), 100)
+                                      setTimeout(() => smoothScrollTo(layanan.href!), 100)
                                     }
                                   }}
                                 >
