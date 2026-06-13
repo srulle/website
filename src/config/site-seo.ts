@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import type { Service } from "@/lib/service-data"
 
-export const SITE_URL = "https://rsudhasjambi.go.id"
+export const SITE_URL = "https://rsudhas.jambikota.go.id"
 export const SITE_NAME = "BLUD RSUD H. Abdurrahman Sayoeti Kota Jambi"
 export const HOSPITAL_NAME = "Badan Layanan Umum Daerah Rumah Sakit Umum Daerah H. Abdurrahman Sayoeti"
 export const HOSPITAL_SHORT_NAME = "RSUD H. Abdurrahman Sayoeti"

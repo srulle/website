@@ -41,14 +41,14 @@ informasi: [
 
 const socialLinks = [
   { name: 'Facebook', href: '#', icon: Facebook },
-  { name: 'Instagram', href: '#', icon: Instagram },
-  { name: 'YouTube', href: '#', icon: Youtube },
+  { name: 'Instagram', href: 'https://www.instagram.com/rsudkotajambii/', icon: Instagram },
+  { name: 'YouTube', href: 'https://www.youtube.com/@abdurrahmansayoeti1276', icon: Youtube },
 ]
 
 const contactInfo = [
   { icon: MapPin, text: 'Jl. KH Hasan Anang, Kota Jambi, Jambi' },
   { icon: Phone, text: '(0741) 123456' },
-  { icon: Mail, text: 'info@rsudhasjambi.go.id' },
+  { icon: Mail, text: 'info@rsudhas.jambikota.go.id' },
   { icon: Clock, text: 'Senin - Minggu: 24 Jam' },
 ]
 
@@ -94,8 +94,10 @@ export function LandingFooter() {
                   key={social.name}
                   href={social.href}
                   aria-label={social.name}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(social.href.startsWith('http') && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                  })}
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <social.icon className="h-5 w-5" />

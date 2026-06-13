@@ -47,7 +47,7 @@ export default function CaraDaftarPage() {
             {`Cara Daftar Pasien Baru RSUD H. Abdurrahman Sayoeti
 
 **Pendaftaran Online**
-1. Akses website rsudhasjambi.go.id
+1. Akses website rsudhas.jambikota.go.id
 2. Klik menu "Pendaftaran Online"
 3. Isi form data pasien
 4. Pilih poliklinik dan dokter tujuan
