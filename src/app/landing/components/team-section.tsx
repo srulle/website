@@ -15,7 +15,7 @@ const doctors = [
     clinic: 'Poliklinik Penyakit Dalam',
     schedule: ['Senin', 'Selasa','Rabu', 'Kamis'],
     fallback: 'RS',
-    image: '/image/dr. Riskadwi Setianti, Sp.PD, FINASIM.png',
+    image: '/image/default.png',
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const doctors = [
     clinic: 'Poliklinik Penyakit Dalam',
     schedule: ['Jumat', 'Sabtu'],
     fallback: 'S',
-    image: '/image/dr. Sulistiansyah, Sp.PD.png',
+    image: '/image/default.png',
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const doctors = [
     clinic: 'Poliklinik Kebidanan dan Kandungan',
     schedule: ['Selasa', 'Kamis', 'Sabtu'],
     fallback: 'N',
-    image: '/image/dr. Nadiyah, Sp.OG.png',
+    image: '/image/default.png',
   },
   {
     id: 6,
@@ -60,7 +60,7 @@ const doctors = [
     clinic: 'Poliklinik Kebidanan dan Kandungan',
     schedule: ['Senin', 'Rabu', 'Jumat'],
     fallback: 'SH',
-    image: '/image/dr. Sindhung Harjono, Sp.OG.png',
+    image: '/image/default.png',
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ const doctors = [
     clinic: 'Poliklinik Anak',
     schedule: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
     fallback: 'NA',
-    image: '/image/dr. Nindya Aryanty, Sp.A.png',
+    image: '/image/default.png',
   },
   {
     id: 8,
@@ -105,7 +105,7 @@ const doctors = [
     clinic: 'Poliklinik Bedah Mulut',
     schedule: ['Senin', 'Rabu', 'Jumat'],
     fallback: 'BBK',
-    image: '/image/drg. Busroch Bayu K, Sp.BM.png',
+    image: '/image/default.png',
   },
   {
     id: 12,
@@ -114,7 +114,7 @@ const doctors = [
     clinic: 'Poliklinik Kesehatan Gigi Anak',
     schedule: ['Selasa', 'Kamis', 'Sabtu'],
     fallback: 'AT',
-    image: '/image/drg. Anggi Trianita, Sp.KGA.png',
+    image: '/image/default.png',
   },
   {
     id: 13,
@@ -123,7 +123,7 @@ const doctors = [
     clinic: 'Poliklinik Gizi',
     schedule: ['Senin', 'Rabu', 'Jumat'],
     fallback: 'LA',
-    image: '/image/dr. Linda Artanti, Sp.GZ.png',
+    image: '/image/default.png',
   },
   {
     id: 14,
@@ -177,7 +177,7 @@ const doctors = [
     clinic: 'Poliklinik Rehabilitasi Medik',
     schedule: ['Senin', 'Selasa', 'Kamis', 'Sabtu'],
     fallback: 'RRB',
-    image: '/image/dr. Reni Rozanti Basyar, Sp.KFR.png',
+    image: '/image/default.png',
   },
   {
     id: 20,
@@ -222,7 +222,7 @@ const doctors = [
     clinic: 'Poliklinik Gigi dan Mulut',
     schedule: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
     fallback: 'RFS',
-    image: '/image/dr. Afriska Norma Utama.png',
+    image: '/image/default.png',
   },
   {
     id: 25,
