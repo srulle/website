@@ -1,24 +1,22 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from "next"
+import "./globals.css"
 
-import NextTopLoader from "nextjs-toploader";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarConfigProvider } from "@/contexts/sidebar-context";
-import { inter, geist } from "@/lib/fonts";
-import SmoothScroll from "@/components/smooth-scroll";
+import NextTopLoader from "nextjs-toploader"
+import { ThemeProvider } from "@/components/theme-provider"
+import { SidebarConfigProvider } from "@/contexts/sidebar-context"
+import { inter, geist } from "@/lib/fonts"
+import SmoothScroll from "@/components/smooth-scroll"
+import { hospitalMetadata } from "@/config/site-seo"
 
-export const metadata: Metadata = {
-  title: "Shadcn Dashboard",
-  description: "A dashboard built with Next.js and shadcn/ui",
-};
+export const metadata: Metadata = hospitalMetadata
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${geist.variable} ${inter.variable} antialiased`}>
+    <html lang="id" className={`${geist.variable} ${inter.variable} antialiased`}>
       <body className={geist.className}>
         <NextTopLoader
           color="#2299DD"
@@ -36,5 +34,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

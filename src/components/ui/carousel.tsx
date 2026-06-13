@@ -7,6 +7,7 @@ import useEmblaCarousel, {
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -147,16 +148,17 @@ Carousel.displayName = "Carousel"
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+>(({ ...props }, ref) => {
   const { carouselRef, orientation } = useCarousel()
 
   return (
     <div ref={carouselRef} className="overflow-hidden">
       <div
         ref={ref}
-        className={`flex ${
-          orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col"
-        }`}
+        className={cn(
+          `flex ${orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col"}`,
+          props.className,
+        )}
         {...props}
       >
         {props.children}
@@ -169,7 +171,7 @@ CarouselContent.displayName = "CarouselContent"
 const CarouselItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+>(({ ...props }, ref) => {
   const { orientation } = useCarousel()
 
   return (
@@ -177,9 +179,12 @@ const CarouselItem = React.forwardRef<
       ref={ref}
       role="group"
       aria-roledescription="slide"
-      className={`min-w-0 shrink-0 grow-0 basis-full sm:basis-[90%] lg:basis-[90%] ${
-        orientation === "horizontal" ? "pl-4" : "pt-4"
-      }`}
+      className={cn(
+        `min-w-0 shrink-0 grow-0 basis-full sm:basis-[90%] lg:basis-[90%] ${
+          orientation === "horizontal" ? "pl-4" : "pt-4"
+        }`,
+        props.className,
+      )}
       {...props}
     >
       {props.children}
@@ -242,7 +247,7 @@ const CarouselDots = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { api, canScrollPrev, canScrollNext } = useCarousel()
+  const { api } = useCarousel()
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
 
@@ -259,7 +264,7 @@ const CarouselDots = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={`flex items-center justify-center gap-2 ${className}`}
+      className={cn("flex items-center justify-center gap-2", className)}
       {...props}
     >
       {scrollSnaps.map((_, index) => (
@@ -272,7 +277,7 @@ const CarouselDots = React.forwardRef<
               : "bg-muted hover:bg-muted-foreground/50"
           }`}
           onClick={() => api?.scrollTo(index)}
-          disabled={!canScrollPrev && index === 0}
+          disabled={false}
         >
           <span className="sr-only">Go to slide {index + 1}</span>
         </button>

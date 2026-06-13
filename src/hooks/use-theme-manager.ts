@@ -66,13 +66,20 @@ export function useThemeManager() {
 
   const updateBrandColorsFromTheme = React.useCallback((styles: Record<string, string>) => {
     const newValues: Record<string, string> = {}
-    baseColors.forEach(color => {
+    baseColors.forEach((color) => {
       const cssVar = color.cssVar.replace('--', '')
       if (styles[cssVar]) {
         newValues[color.cssVar] = styles[cssVar]
       }
     })
-    setBrandColorsValues(newValues)
+
+    setBrandColorsValues((currentValues) => {
+      const hasSameKeys =
+        Object.keys(currentValues).length === Object.keys(newValues).length &&
+        Object.entries(newValues).every(([key, value]) => currentValues[key] === value)
+
+      return hasSameKeys ? currentValues : newValues
+    })
   }, [])
 
   const applyTheme = React.useCallback((themeValue: string, darkMode: boolean) => {
@@ -126,13 +133,13 @@ export function useThemeManager() {
     setBrandColorsValues(newBrandColors)
   }, [])
 
-  const applyRadius = (radius: string) => {
+  const applyRadius = React.useCallback((radius: string) => {
     document.documentElement.style.setProperty('--radius', radius)
-  }
+  }, [])
 
-  const handleColorChange = (cssVar: string, value: string) => {
+  const handleColorChange = React.useCallback((cssVar: string, value: string) => {
     document.documentElement.style.setProperty(cssVar, value)
-  }
+  }, [])
 
   return {
     theme,

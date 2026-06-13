@@ -1,20 +1,21 @@
 "use client"
 
-import React from 'react'
-import { Layout, Palette, RotateCcw, Settings, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useThemeManager } from '@/hooks/use-theme-manager'
-import { useSidebarConfig } from '@/contexts/sidebar-context'
-import { tweakcnThemes } from '@/config/theme-data'
-import { ThemeTab } from './theme-tab'
-import { LayoutTab } from './layout-tab'
-import { ImportModal } from './import-modal'
-import { cn } from '@/lib/utils'
-import type { ImportedTheme } from '@/types/theme-customizer'
+import React from "react"
+import { Layout, Palette, RotateCcw, Settings, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useThemeManager } from "@/hooks/use-theme-manager"
+import { useSidebarConfig } from "@/contexts/sidebar-context"
+import { tweakcnThemes } from "@/config/theme-data"
+import { ThemeTab } from "./theme-tab"
+import { LayoutTab } from "./layout-tab"
+import { ImportModal } from "./import-modal"
+import { cn } from "@/lib/utils"
+import { readStorage, removeStorage, storageKeys, writeStorage } from "@/utils/theme-storage"
+import type { ImportedTheme } from "@/types/theme-customizer"
 
-interface ThemeCustomizerProps {
+type ThemeCustomizerProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -24,134 +25,87 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
   const { config: sidebarConfig, updateConfig: updateSidebarConfig } = useSidebarConfig()
 
   const [activeTab, setActiveTab] = React.useState("theme")
-  const [selectedTheme, setSelectedTheme] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("selectedTheme") || "default"
-    }
-    return "default"
-  })
-  const [selectedTweakcnTheme, setSelectedTweakcnTheme] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("selectedTweakcnTheme") || ""
-    }
-    return ""
-  })
-  const [selectedRadius, setSelectedRadius] = React.useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("selectedRadius") || "0.5rem"
-    }
-    return "0.5rem"
-  })
+  const [selectedTheme, setSelectedTheme] = React.useState(() => readStorage(storageKeys.theme, "default"))
+  const [selectedTweakcnTheme, setSelectedTweakcnTheme] = React.useState(() => readStorage(storageKeys.tweakcnTheme, ""))
+  const [selectedRadius, setSelectedRadius] = React.useState(() => readStorage(storageKeys.radius, "0.5rem"))
   const [importModalOpen, setImportModalOpen] = React.useState(false)
-  const [importedTheme, setImportedTheme] = React.useState<ImportedTheme | null>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("importedTheme")
-      return saved ? JSON.parse(saved) : null
-    }
-    return null
-  })
+  const [importedTheme, setImportedTheme] = React.useState<ImportedTheme | null>(() =>
+    readStorage(storageKeys.importedTheme, null),
+  )
 
-  // Save to localStorage when values change
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("selectedTheme", selectedTheme)
-    }
+    writeStorage(storageKeys.theme, selectedTheme)
   }, [selectedTheme])
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("selectedTweakcnTheme", selectedTweakcnTheme)
+    if (selectedTweakcnTheme) {
+      writeStorage(storageKeys.tweakcnTheme, selectedTweakcnTheme)
+    } else {
+      removeStorage(storageKeys.tweakcnTheme)
     }
   }, [selectedTweakcnTheme])
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("selectedRadius", selectedRadius)
-    }
+    writeStorage(storageKeys.radius, selectedRadius)
   }, [selectedRadius])
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (importedTheme) {
-        localStorage.setItem("importedTheme", JSON.stringify(importedTheme))
-      } else {
-        localStorage.removeItem("importedTheme")
-      }
-    }
+    writeStorage(storageKeys.importedTheme, importedTheme)
   }, [importedTheme])
 
-  // Apply saved theme on mount
   React.useEffect(() => {
     if (importedTheme) {
       applyImportedTheme(importedTheme, isDarkMode)
     } else if (selectedTheme && selectedTheme !== "default") {
       applyTheme(selectedTheme, isDarkMode)
     } else if (selectedTweakcnTheme) {
-      const selectedPreset = tweakcnThemes.find(t => t.value === selectedTweakcnTheme)?.preset
+      const selectedPreset = tweakcnThemes.find((theme) => theme.value === selectedTweakcnTheme)?.preset
       if (selectedPreset) {
         applyTweakcnTheme(selectedPreset, isDarkMode)
       }
     }
+
     if (selectedRadius !== "0.5rem") {
       applyRadius(selectedRadius)
     }
-  }, []) // Empty dependency array to run only on mount
+  }, [applyImportedTheme, applyRadius, applyTheme, applyTweakcnTheme, importedTheme, isDarkMode, selectedRadius, selectedTheme, selectedTweakcnTheme])
 
   const handleReset = () => {
-    // Complete reset to application defaults
-
-    // 1. Reset all state variables to initial values
     setSelectedTheme("default")
     setSelectedTweakcnTheme("")
     setSelectedRadius("0.5rem")
-    setImportedTheme(null) // Clear imported theme
-    setBrandColorsValues({}) // Clear brand colors state
+    setImportedTheme(null)
+    setBrandColorsValues({})
 
-    // 2. Clear localStorage
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("selectedTheme")
-      localStorage.removeItem("selectedTweakcnTheme")
-      localStorage.removeItem("selectedRadius")
-      localStorage.removeItem("importedTheme")
-    }
+    removeStorage(storageKeys.theme)
+    removeStorage(storageKeys.tweakcnTheme)
+    removeStorage(storageKeys.radius)
+    removeStorage(storageKeys.importedTheme)
 
-    // 3. Completely remove all custom CSS variables
     resetTheme()
-
-    // 4. Reset the radius to default
     applyRadius("0.5rem")
-
-    // 5. Reset sidebar to defaults
     updateSidebarConfig({ variant: "inset", collapsible: "offcanvas", side: "left" })
   }
 
   const handleImport = (themeData: ImportedTheme) => {
     setImportedTheme(themeData)
-    // Clear other selections to indicate custom import is active
     setSelectedTheme("")
     setSelectedTweakcnTheme("")
-
-    // Apply the imported theme
     applyImportedTheme(themeData, isDarkMode)
   }
 
-  const handleImportClick = () => {
-    setImportModalOpen(true)
-  }
-
-  // Re-apply themes when theme mode changes
   React.useEffect(() => {
     if (importedTheme) {
       applyImportedTheme(importedTheme, isDarkMode)
-    } else if (selectedTheme) {
+    } else if (selectedTheme && selectedTheme !== "default") {
       applyTheme(selectedTheme, isDarkMode)
     } else if (selectedTweakcnTheme) {
-      const selectedPreset = tweakcnThemes.find(t => t.value === selectedTweakcnTheme)?.preset
+      const selectedPreset = tweakcnThemes.find((theme) => theme.value === selectedTweakcnTheme)?.preset
       if (selectedPreset) {
         applyTweakcnTheme(selectedPreset, isDarkMode)
       }
     }
-  }, [isDarkMode, importedTheme, selectedTheme, selectedTweakcnTheme, applyImportedTheme, applyTheme, applyTweakcnTheme])
+  }, [applyImportedTheme, applyTheme, applyTweakcnTheme, importedTheme, isDarkMode, selectedTheme, selectedTweakcnTheme])
 
   return (
     <>
@@ -159,47 +113,46 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
         <SheetContent
           side={sidebarConfig.side === "left" ? "right" : "left"}
           className="w-[400px] p-0 gap-0 pointer-events-auto [&>button]:hidden overflow-hidden flex flex-col"
-          onInteractOutside={(e) => {
-            // Prevent the sheet from closing when dialog is open
+          onInteractOutside={(event) => {
             if (importModalOpen) {
-              e.preventDefault()
+              event.preventDefault()
             }
           }}
         >
           <SheetHeader className="space-y-0 p-4 pb-2">
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-primary/10 rounded-lg">
+              <div className="rounded-lg bg-primary/10 p-2">
                 <Settings className="h-4 w-4" />
               </div>
               <SheetTitle className="text-lg font-semibold">Customizer</SheetTitle>
               <div className="ml-auto flex items-center gap-2">
-                <Button variant="outline" size="icon" onClick={handleReset} className="cursor-pointer h-8 w-8">
+                <Button variant="outline" size="icon" onClick={handleReset} className="h-8 w-8 cursor-pointer">
                   <RotateCcw className="h-4 w-4" />
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => onOpenChange(false)} className="cursor-pointer h-8 w-8">
+                <Button variant="outline" size="icon" onClick={() => onOpenChange(false)} className="h-8 w-8 cursor-pointer">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             </div>
-            <SheetDescription className="text-sm text-muted-foreground sr-only">
-              Customize the them and layout of your dashboard.
+            <SheetDescription className="sr-only text-sm text-muted-foreground">
+              Customize the theme and layout of your dashboard.
             </SheetDescription>
           </SheetHeader>
 
           <div className="flex-1 overflow-y-auto">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex h-full flex-col">
               <div className="py-2">
-                <TabsList className="grid w-full grid-cols-2 rounded-none h-12 p-1.5">
-                  <TabsTrigger value="theme" className="cursor-pointer data-[state=active]:bg-background"><Palette className="h-4 w-4 mr-1" /> Theme</TabsTrigger>
-                  <TabsTrigger value="layout" className="cursor-pointer data-[state=active]:bg-background"><Layout className="h-4 w-4 mr-1" /> Layout</TabsTrigger>
+                <TabsList className="grid h-12 w-full grid-cols-2 rounded-none p-1.5">
+                  <TabsTrigger value="theme" className="cursor-pointer data-[state=active]:bg-background">
+                    <Palette className="mr-1 h-4 w-4" /> Theme
+                  </TabsTrigger>
+                  <TabsTrigger value="layout" className="cursor-pointer data-[state=active]:bg-background">
+                    <Layout className="mr-1 h-4 w-4" /> Layout
+                  </TabsTrigger>
                 </TabsList>
-                {/* <TabsList className="grid w-full grid-cols-2 rounded-none h-12 p-1.5">
-                  <TabsTrigger value="theme" className="cursor-pointer data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"><Palette className="h-4 w-4 mr-1" /> Theme</TabsTrigger>
-                  <TabsTrigger value="layout" className="cursor-pointer data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"><Layout className="h-4 w-4 mr-1" /> Layout</TabsTrigger>
-                </TabsList> */}
               </div>
 
-              <TabsContent value="theme" className="flex-1 mt-0">
+              <TabsContent value="theme" className="mt-0 flex-1">
                 <ThemeTab
                   selectedTheme={selectedTheme}
                   setSelectedTheme={setSelectedTheme}
@@ -208,11 +161,11 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
                   selectedRadius={selectedRadius}
                   setSelectedRadius={setSelectedRadius}
                   setImportedTheme={setImportedTheme}
-                  onImportClick={handleImportClick}
+                  onImportClick={() => setImportModalOpen(true)}
                 />
               </TabsContent>
 
-              <TabsContent value="layout" className="flex-1 mt-0">
+              <TabsContent value="layout" className="mt-0 flex-1">
                 <LayoutTab />
               </TabsContent>
             </Tabs>
@@ -220,16 +173,11 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
         </SheetContent>
       </Sheet>
 
-      <ImportModal
-        open={importModalOpen}
-        onOpenChange={setImportModalOpen}
-        onImport={handleImport}
-      />
+      <ImportModal open={importModalOpen} onOpenChange={setImportModalOpen} onImport={handleImport} />
     </>
   )
 }
 
-// Floating trigger button - positioned dynamically based on sidebar side
 export function ThemeCustomizerTrigger({ onClick }: { onClick: () => void }) {
   const { config: sidebarConfig } = useSidebarConfig()
 
@@ -238,8 +186,8 @@ export function ThemeCustomizerTrigger({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       size="icon"
       className={cn(
-        "fixed top-1/2 -translate-y-1/2 h-12 w-12 rounded-full shadow-lg z-50 bg-primary hover:bg-primary/90 text-primary-foreground cursor-pointer",
-        sidebarConfig.side === "left" ? "right-4" : "left-4"
+        "fixed top-1/2 h-12 w-12 -translate-y-1/2 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90",
+        sidebarConfig.side === "left" ? "right-4" : "left-4",
       )}
     >
       <Settings className="h-5 w-5" />

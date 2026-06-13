@@ -1,12 +1,13 @@
-import * as React from "react"
+import Image from "next/image"
+import type { HTMLAttributes } from "react"
 
-interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+type LogoProps = HTMLAttributes<HTMLDivElement> & {
   size?: number
 }
 
 export function Logo({ size = 24, className, ...props }: LogoProps) {
   return (
-    <img
+    <Image
       src="/logo/logo-kota-jambi.svg"
       alt="Logo Kota Jambi"
       width={size}

@@ -1,10 +1,13 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { JsonLd } from '@/components/seo/json-ld'
 import { LandingNavbar } from '@/app/landing/components/navbar'
+import { createNewsArticleJsonLd, createNewsMetadata, type SeoNewsItem } from '@/config/site-seo'
 import { news } from '@/lib/news-data'
 
 interface PageProps {
@@ -13,17 +16,44 @@ interface PageProps {
   }>
 }
 
+function toSeoNewsItem(item: (typeof news)[number]): SeoNewsItem {
+  return {
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    date: item.date,
+    category: item.category,
+    image: item.image,
+  }
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  const newsItem = news.find((item) => item.id === parseInt(id))
+
+  if (!newsItem) {
+    return {
+      title: 'Berita tidak ditemukan',
+      robots: { index: false, follow: false },
+    }
+  }
+
+  return createNewsMetadata(toSeoNewsItem(newsItem))
+}
+
 export default async function NewsPage({ params }: PageProps) {
   const { id } = await params
-  const newsItem = news.find(item => item.id === parseInt(id))
+  const newsItem = news.find((item) => item.id === parseInt(id))
 
   if (!newsItem) {
     notFound()
   }
 
+  const seoNewsItem = toSeoNewsItem(newsItem)
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
+      <JsonLd data={createNewsArticleJsonLd(seoNewsItem)} />
       <LandingNavbar />
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">

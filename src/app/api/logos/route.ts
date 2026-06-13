@@ -12,7 +12,7 @@ export async function GET() {
       src: `/logo/svg/${file}`
     }))
     return NextResponse.json(logos)
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to read logos' }, { status: 500 })
   }
 }

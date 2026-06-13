@@ -2,10 +2,8 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { CardDecorator } from '@/components/ui/card-decorator'
+import { Card } from '@/components/ui/card'
 import { UserRound, ChevronDown, ChevronUp } from 'lucide-react'
 
 
@@ -255,8 +253,7 @@ export function TeamSection() {
   return (
     <section id="team" className="py-16 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mx-auto max-w-4xl text-center mb-16">
+        <div className="mx-auto max-w-4xl text-center mb-10">
           <Badge variant="outline" className="mb-4">
             Tim Medis
           </Badge>
@@ -268,59 +265,73 @@ export function TeamSection() {
           </p>
         </div>
 
-        {/* Doctors Grid */}
-        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto my-5 grid gap-8">
           {visibleDoctors.map((doctor) => (
-            <Card key={doctor.id} className="shadow-xs overflow-hidden group relative h-80 cursor-default">
-              {/* Full background image */}
-              {doctor.image === '/image/default.png' ? (
-                <div className="flex items-center justify-center h-full">
-                  <UserRound className="h-44 w-44 text-muted-foreground opacity-60" />
-                </div>
-              ) : (
-                <Image 
-                  src={doctor.image} 
-                  alt={doctor.name}
-                  fill
-                  className="object-contain object-top transition-transform duration-300 group-hover:scale-125 group-active:scale-125 origin-top bg-muted/30"
-                  sizes="(max-width: 768px) 100vw, 25vw"
-                />
-              )}
-              
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              
-              {/* Text content on top */}
-              <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-white z-10">
-                <div className="text-center">
-                  {/* Name and Role */}
-                  <h3 className="text-lg font-semibold mb-1">
+            <Card
+              key={doctor.id}
+              className="group relative !gap-0 !py-0 flex h-auto flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm md:h-72 md:flex-row md:items-center md:shadow-xl dark:md:shadow-primary/10"
+            >
+              <div className="relative z-0 order-1 h-80 w-full overflow-hidden rounded-lg md:order-2 md:h-full md:w-2/5 md:rounded-none md:rounded-r-lg">
+                {doctor.image === '/image/default.png' ? (
+                  <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-primary/10 object-fill object-center">
+                    <UserRound className="h-44 w-44 text-muted-foreground opacity-60" />
+                  </div>
+                ) : (
+                  <Image
+                    src={doctor.image}
+                    alt={doctor.name}
+                    fill
+                    className="object-fill object-center bg-primary/20 transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                )}
+                <div className="absolute inset-0 bg-primary/30 opacity-90 mix-blend-multiply" />
+
+                <div className="absolute inset-0 flex h-full flex-col-reverse items-start justify-start bg-gradient-to-b from-transparent via-transparent to-gray-950 p-6 pb-6 md:hidden">
+                  <h3 className="mb-2 w-full text-2xl font-bold leading-tight text-white">
                     {doctor.name}
                   </h3>
-                  <p className="text-sm font-medium text-primary/90 mb-2">
+                  <h4 className="w-full text-xl leading-tight text-gray-100">
                     {doctor.role}
-                  </p>
-
-                  {/* Clinic Name */}
-                  <p className="text-sm font-medium text-white/90 mb-2">
-                    {doctor.clinic}
-                  </p>
-
-                  {/* Schedule */}
-                  <div className="text-sm text-white/80">
-                    <span className="font-medium">Praktek: </span>
-                    {doctor.schedule.join(', ')}
-                  </div>
+                  </h4>
                 </div>
-              </CardContent>
+
+                <svg
+                  className="-ml-12 hidden h-full w-24 fill-card md:absolute md:inset-y-0 md:block"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                >
+                  <polygon points="50,0 100,0 50,100 0,100" />
+                </svg>
+              </div>
+
+              <div className="relative z-10 order-2 flex h-full w-full items-center -mt-6 md:order-1 md:w-3/5 md:mt-0">
+                <div className="mx-2 h-full rounded-lg bg-background p-8 shadow-xl md:mx-0 md:rounded-none md:rounded-l-lg md:bg-card md:px-14 md:py-12 md:shadow-none md:pr-18">
+                  <h4 className="hidden text-xl text-muted-foreground md:block">
+                    Dokter Praktik
+                  </h4>
+                  <h3 className="hidden text-2xl font-bold text-foreground md:block">
+                    {doctor.name}
+                  </h3>
+                  <p className="text-justify text-muted-foreground">
+                    {doctor.role} di {doctor.clinic}. Jadwal praktik: {doctor.schedule.join(', ')}.
+                  </p>
+                  <a
+                    href="#team"
+                    className="mt-3 flex items-baseline text-primary hover:text-primary/80 focus:text-primary/80"
+                  >
+                    <span>Lihat detail jadwal</span>
+                    <span className="ml-1 text-xs">&#x279c;</span>
+                  </a>
+                </div>
+              </div>
             </Card>
           ))}
         </div>
 
-        {/* Show All Link */}
         {hasMore && (
-          <div className="mt-12 text-center">
-            <button 
+          <div className="mt-10 text-center">
+            <button
               type="button"
               onClick={() => setShowAll(!showAll)}
               className="inline-flex items-center gap-1 text-primary hover:text-primary/80 underline underline-offset-4 cursor-pointer transition-colors"
@@ -339,6 +350,99 @@ export function TeamSection() {
             </button>
           </div>
         )}
+
+        {/*
+        return (
+          <section id="team" className="py-16 sm:py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              Section Header
+              <div className="mx-auto max-w-4xl text-center mb-16">
+                <Badge variant="outline" className="mb-4">
+                  Tim Medis
+                </Badge>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+                  Tim Dokter Spesialis Kami
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Tim dokter spesialis kami yang berpengalaman dan profesional siap memberikan pelayanan kesehatan terbaik untuk Anda dan keluarga.
+                </p>
+              </div>
+
+              Doctors Grid
+              <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
+                {visibleDoctors.map((doctor) => (
+                  <Card key={doctor.id} className="shadow-xs overflow-hidden group relative h-80 cursor-default">
+                    Full background image
+                    {doctor.image === '/image/default.png' ? (
+                      <div className="flex items-center justify-center h-full">
+                        <UserRound className="h-44 w-44 text-muted-foreground opacity-60" />
+                      </div>
+                    ) : (
+                      <Image
+                        src={doctor.image}
+                        alt={doctor.name}
+                        fill
+                        className="object-contain object-top transition-transform duration-300 group-hover:scale-125 group-active:scale-125 origin-top bg-muted/30"
+                        sizes="(max-width: 768px) 100vw, 25vw"
+                      />
+                    )}
+                    
+                    Overlay gradient
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    
+                    Text content on top
+                    <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-white z-10">
+                      <div className="text-center">
+                        Name and Role
+                        <h3 className="text-lg font-semibold mb-1">
+                          {doctor.name}
+                        </h3>
+                        <p className="text-sm font-medium text-primary/90 mb-2">
+                          {doctor.role}
+                        </p>
+
+                        Clinic Name
+                        <p className="text-sm font-medium text-white/90 mb-2">
+                          {doctor.clinic}
+                        </p>
+
+                        Schedule
+                        <div className="text-sm text-white/80">
+                          <span className="font-medium">Praktek: </span>
+                          {doctor.schedule.join(', ')}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              Show All Link
+              {hasMore && (
+                <div className="mt-12 text-center">
+                  <button
+                    type="button"
+                    onClick={() => setShowAll(!showAll)}
+                    className="inline-flex items-center gap-1 text-primary hover:text-primary/80 underline underline-offset-4 cursor-pointer transition-colors"
+                  >
+                    {showAll ? (
+                      <>
+                        Sembunyikan
+                        <ChevronUp className="h-4 w-4" />
+                      </>
+                    ) : (
+                      <>
+                        Tampilkan Semua ({doctors.length - MAX_ITEMS} lainnya)
+                        <ChevronDown className="h-4 w-4" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
+            </div>
+          </section>
+        )
+        */}
       </div>
     </section>
   )
