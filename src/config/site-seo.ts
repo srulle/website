@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import type { Service } from "@/lib/service-data"
+import type { PpidPage } from "@/lib/ppid-data"
 
 export const SITE_URL = "https://rsudhas.jambikota.go.id"
 export const SITE_NAME = "BLUD RSUD H. Abdurrahman Sayoeti Kota Jambi"
@@ -101,6 +102,57 @@ export const newsPageMetadata = {
   },
 } satisfies Metadata
 
+export const ppidPageMetadata = {
+  ...hospitalMetadata,
+  title: `PPID | ${HOSPITAL_SHORT_NAME}`,
+  description:
+    "Informasi Publik dan dokumen PPID RSUD H. Abdurrahman Sayoeti Kota Jambi, meliputi dokumen perencanaan, keuangan, regulasi, dan laporan.",
+  alternates: {
+    canonical: `${SITE_URL}/landing/ppid`,
+  },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    siteName: SITE_NAME,
+    title: `PPID | ${HOSPITAL_SHORT_NAME}`,
+    description:
+      "Informasi Publik dan dokumen PPID RSUD H. Abdurrahman Sayoeti Kota Jambi, meliputi dokumen perencanaan, keuangan, regulasi, dan laporan.",
+    url: `${SITE_URL}/landing/ppid`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `PPID | ${HOSPITAL_SHORT_NAME}`,
+    description:
+      "Informasi Publik dan dokumen PPID RSUD H. Abdurrahman Sayoeti Kota Jambi, meliputi dokumen perencanaan, keuangan, regulasi, dan laporan.",
+  },
+} satisfies Metadata
+
+export function createPpidMetadata(page: PpidPage): Metadata {
+  const title = `${page.title} | PPID | ${HOSPITAL_SHORT_NAME}`
+  const url = `${SITE_URL}/landing/ppid/${page.id}`
+
+  return {
+    title,
+    description: page.description,
+    keywords: [page.title, `PPID ${page.title}`, `${HOSPITAL_SHORT_NAME} PPID`],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "website",
+      locale: "id_ID",
+      siteName: SITE_NAME,
+      title,
+      description: page.description,
+      url,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: page.description,
+    },
+  }
+}
 export type SeoNewsItem = {
   id: number
   title: string
@@ -244,6 +296,37 @@ export function createServiceJsonLd(service: Service) {
       "@type": "ServiceChannel",
       serviceUrl: url,
       servicePhone: CONTACT_PHONE,
+    },
+  }
+}
+
+export function createPpidJsonLd(page: PpidPage) {
+  const url = `${SITE_URL}/landing/ppid/${page.id}`
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${page.title} | PPID`,
+    description: page.description,
+    url,
+    publisher: {
+      "@id": `${SITE_URL}/#hospital`,
+    },
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
+    mainEntity: {
+      "@type": "GovernmentService",
+      name: "PPID",
+      serviceType: page.title,
+      areaServed: {
+        "@type": "City",
+        name: "Kota Jambi",
+      },
+      provider: {
+        "@id": `${SITE_URL}/#hospital`,
+      },
+      url,
     },
   }
 }

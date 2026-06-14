@@ -14,8 +14,52 @@ import {
   ClipboardList,
   CreditCard,
   FileText,
+  Target,
+  FileCheck,
+  Wallet,
+  Coins,
+  ChartBar,
+  Scale,
+  BookOpen,
+  BookMarked,
+  Signature,
+  ClipboardCheck,
+  FileBarChart,
   type LucideIcon,
 } from "lucide-react"
+
+const iconMap: Record<string, LucideIcon> = {
+  "file-text": FileText,
+  target: Target,
+  "clipboard-list": ClipboardList,
+  "file-check": FileCheck,
+  wallet: Wallet,
+  coins: Coins,
+  "chart-bar": ChartBar,
+  scale: Scale,
+  "book-open": BookOpen,
+  "book-marked": BookMarked,
+  signature: Signature,
+  "clipboard-check": ClipboardCheck,
+  "file-bar-chart": FileBarChart,
+}
+
+type MegaMenuItem = {
+  title: string
+  description?: string
+  href: string
+  icon?: LucideIcon | string
+}
+
+type MegaMenuSection = {
+  title: string
+  items: MegaMenuItem[]
+}
+
+type MegaMenuProps = {
+  sections: MegaMenuSection[]
+}
+
 type LayananItem = {
   title: string
   description: string
@@ -39,39 +83,47 @@ const layananDetails: Record<string, Omit<LayananItem, "title">> = {
   "BPJS Kesehatan": { description: "Informasi layanan BPJS dan asuransi", icon: CreditCard, href: "/landing/informasi/bpjs" },
 }
 
-const menuSections = [
-  { title: "Layanan Unggulan", names: ["Rawat Jalan", "Rawat Inap", "Gawat Darurat"] },
-  { title: "Fasilitas", names: ["Radiologi", "Laboratorium", "Farmasi", "ICU", "Ruang Bersalin"] },
-  { title: "Informasi Pasien", names: ["Jadwal Dokter", "Alur Pelayanan", "Informasi Tempat Tidur", "Cara Daftar", "BPJS Kesehatan"] },
+export const layananMenuSections: MegaMenuSection[] = [
+  { title: "Layanan Unggulan", items: ["Rawat Jalan", "Rawat Inap", "Gawat Darurat"] },
+  { title: "Fasilitas", items: ["Radiologi", "Laboratorium", "Farmasi", "ICU", "Ruang Bersalin"] },
+  { title: "Informasi Pasien", items: ["Jadwal Dokter", "Alur Pelayanan", "Informasi Tempat Tidur", "Cara Daftar", "BPJS Kesehatan"] },
 ].map((section) => ({
   title: section.title,
-  items: section.names.map<LayananItem>((name) => ({
+  items: section.items.map<LayananItem>((name) => ({
     title: name,
     ...layananDetails[name],
   })),
 }))
 
-export function MegaMenu() {
+export function MegaMenu({ sections }: MegaMenuProps) {
   return (
     <div className="w-[700px] max-w-[95vw] bg-background p-4 sm:p-6 lg:p-8">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 xl:grid-cols-3 lg:gap-12">
-        {menuSections.map((section) => (
+        {sections.map((section) => (
           <div key={section.title} className="space-y-4 lg:space-y-6">
-            <h3 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">{section.title}</h3>
+            <h3 className="whitespace-nowrap text-sm font-medium uppercase tracking-wide text-muted-foreground">{section.title}</h3>
             <div className="space-y-3 lg:space-y-4">
-              {section.items.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="my-0 block cursor-pointer space-y-1 rounded-md p-2 transition-colors hover:bg-accent group lg:-mx-3 lg:space-y-2 lg:p-3"
-                >
-                  <div className="flex items-center gap-2 lg:gap-3">
-                    <item.icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-                    <span className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">{item.title}</span>
-                  </div>
-                  <p className="ml-6 text-xs leading-relaxed text-muted-foreground lg:ml-7">{item.description}</p>
-                </Link>
-              ))}
+              {section.items.map((item) => {
+                const Icon = typeof item.icon === "string" ? iconMap[item.icon] : item.icon
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="my-0 block cursor-pointer space-y-1 rounded-md p-2 transition-colors hover:bg-accent group lg:-mx-3 lg:space-y-2 lg:p-3"
+                  >
+                    <div className="flex items-center gap-2 lg:gap-3">
+                      {Icon ? (
+                        <Icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                      ) : (
+                        <span className="h-4 w-4" />
+                      )}
+                      <span className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">{item.title}</span>
+                    </div>
+                    {item.description && <p className="ml-6 text-xs leading-relaxed text-muted-foreground lg:ml-7">{item.description}</p>}
+                  </Link>
+                )
+              })}
             </div>
           </div>
         ))}

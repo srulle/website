@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import type { LandingNavigationItem, LayananMenuItem } from "@/config/landing-navigation"
+import { ppidMenuSections } from "@/config/landing-navigation"
 import type { Theme } from "@/contexts/theme-context"
 
 type MobileNavigationProps = {
@@ -79,30 +80,50 @@ export function MobileNavigation({
                         <ChevronDown className={`h-4 w-4 transition-transform ${layananOpen ? "rotate-180" : ""}`} />
                       </CollapsibleTrigger>
                       <CollapsibleContent className="space-y-1 pl-4">
-                        {layananItems.map((layanan, index) => {
-                          if (layanan.title) {
-                            return (
-                              <div key={`title-${index}`} className="mt-5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/50">
-                                {layanan.title}
+                        {item.name === "PPID" ? (
+                          ppidMenuSections.map((section, sectionIndex) => (
+                            <div key={section.title}>
+                              <div key={`ppid-title-${sectionIndex}`} className="mt-5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/50">
+                                {section.title}
                               </div>
+                              {section.items.map((ppid) => (
+                                <Link
+                                  key={ppid.href}
+                                  href={ppid.href}
+                                  className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                                  onClick={(event) => handleMobileLinkClick(event, ppid.href, setIsOpen)}
+                                >
+                                  {ppid.title}
+                                </Link>
+                              ))}
+                            </div>
+                          ))
+                        ) : (
+                          layananItems.map((layanan, index) => {
+                            if (layanan.title) {
+                              return (
+                                <div key={`title-${index}`} className="mt-5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/50">
+                                  {layanan.title}
+                                </div>
+                              )
+                            }
+
+                            if (!layanan.href || !layanan.name) return null
+
+                            const href = layanan.href
+
+                            return (
+                              <Link
+                                key={layanan.name}
+                                href={href}
+                                className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                                onClick={(event) => handleMobileLinkClick(event, href, setIsOpen)}
+                              >
+                                {layanan.name}
+                              </Link>
                             )
-                          }
-
-                          if (!layanan.href || !layanan.name) return null
-
-                          const href = layanan.href
-
-                          return (
-                            <Link
-                              key={layanan.name}
-                              href={href}
-                              className="flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-                              onClick={(event) => handleMobileLinkClick(event, href, setIsOpen)}
-                            >
-                              {layanan.name}
-                            </Link>
-                          )
-                        })}
+                          })
+                        )}
                       </CollapsibleContent>
                     </Collapsible>
                   ) : (

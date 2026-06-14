@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { ArrowLeft, CheckIcon, Stethoscope, BedDouble, Ambulance, Scan, FlaskConical, Pill, HeartPulse, Baby } from 'lucide-react'
+import { ArrowLeft, CheckIcon, MoveLeft, Stethoscope, BedDouble, Ambulance, Scan, FlaskConical, Pill, HeartPulse, Baby } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import type { Service } from '@/lib/service-data'
@@ -32,13 +32,11 @@ export function ServicePageClient({ service }: ServicePageClientProps) {
       <LandingThemeCustomizer open={themeCustomizerOpen} onOpenChange={setThemeCustomizerOpen} />
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="mb-8">
-          <Link href="/landing">
-            <Button variant="ghost" className="mb-4">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Kembali ke Beranda
-            </Button>
-          </Link>
+        <div className="mb-6">
+          <Button variant="ghost" onClick={() => window.history.back()}>
+            <MoveLeft className="mr-2 h-4 w-4" />
+            Kembali
+          </Button>
         </div>
 
         <div className="mb-8">
@@ -76,6 +74,15 @@ export function ServicePageClient({ service }: ServicePageClientProps) {
           <div className="whitespace-pre-line text-muted-foreground leading-relaxed">
             {service.fullContent}
           </div>
+        </div>
+
+        <div className="mt-10">
+          <Link href="/landing">
+            <Button variant="ghost">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Kembali ke Beranda
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
