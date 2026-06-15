@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
 import { UserRound, ChevronDown, ChevronUp } from 'lucide-react'
 
 
@@ -251,8 +250,8 @@ export function TeamSection() {
   const hasMore = doctors.length > MAX_ITEMS
 
   return (
-    <section id="team" className="py-16 sm:py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="team" className="w-full py-16 sm:py-16">
+      <div className="w-full max-w-none px-4 sm:px-6 2xl:px-0">
         <div className="mx-auto max-w-4xl text-center mb-10">
           <Badge variant="outline" className="mb-4">
             Tim Medis
@@ -265,13 +264,13 @@ export function TeamSection() {
           </p>
         </div>
 
-        <div className="mx-auto my-5 grid gap-8">
-          {visibleDoctors.map((doctor) => (
-            <Card
+        <div className="w-full my-5 grid grid-cols-1 gap-8 md:grid-cols-1 2xl:grid-cols-2">
+          {visibleDoctors.map((doctor, index) => (
+            <div
               key={doctor.id}
-              className="group relative !gap-0 !py-0 flex h-auto flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm md:h-72 md:flex-row md:items-center md:shadow-xl dark:md:shadow-primary/10"
+              className="group relative flex h-auto flex-col md:h-72 md:flex-row md:items-center md:overflow-hidden md:rounded-lg"
             >
-              <div className="relative z-0 order-1 h-80 w-full overflow-hidden rounded-lg md:order-2 md:h-full md:w-2/5 md:rounded-none md:rounded-r-lg">
+              <div className={`relative z-0 order-1 h-80 w-full overflow-hidden rounded-lg md:order-2 md:h-full md:w-2/5 md:rounded-none ${index % 2 === 0 ? '2xl:order-2 2xl:[clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]' : '2xl:order-1 2xl:[clip-path:polygon(0_0,80%_0,100%_100%,0%_100%)]'}`}>
                 {doctor.image === '/image/default.png' ? (
                   <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-primary/10 object-fill object-center">
                     <UserRound className="h-44 w-44 text-muted-foreground opacity-60" />
@@ -295,18 +294,10 @@ export function TeamSection() {
                     {doctor.role}
                   </h4>
                 </div>
-
-                <svg
-                  className="-ml-12 hidden h-full w-24 fill-card md:absolute md:inset-y-0 md:block"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                >
-                  <polygon points="50,0 100,0 50,100 0,100" />
-                </svg>
               </div>
 
-              <div className="relative z-10 order-2 flex h-full w-full items-center -mt-6 md:order-1 md:w-3/5 md:mt-0">
-                <div className="mx-2 h-full rounded-lg bg-background p-8 shadow-xl md:mx-0 md:rounded-none md:rounded-l-lg md:bg-card md:px-14 md:py-12 md:shadow-none md:pr-18">
+              <div className={`relative z-10 order-2 flex h-full w-full items-center -mt-6 md:order-1 md:w-3/5 md:mt-0 ${index % 2 === 0 ? '2xl:order-1' : '2xl:order-2'}`}>
+                <div className="mx-2 h-full rounded-lg bg-background p-8 shadow-xl md:mx-0 md:rounded-none md:bg-card md:px-14 md:py-12 md:shadow-none md:pr-18">
                   <h4 className="hidden text-xl text-muted-foreground md:block">
                     Dokter Praktik
                   </h4>
@@ -325,7 +316,7 @@ export function TeamSection() {
                   </a>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
@@ -354,7 +345,8 @@ export function TeamSection() {
         {/*
         return (
           <section id="team" className="py-16 sm:py-16">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-none px-4 sm:px-6 lg:px-8">
+
               Section Header
               <div className="mx-auto max-w-4xl text-center mb-16">
                 <Badge variant="outline" className="mb-4">
@@ -370,7 +362,8 @@ export function TeamSection() {
 
               Doctors Grid
               <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-4">
-                {visibleDoctors.map((doctor) => (
+          {visibleDoctors.map((doctor, index) => (
+
                   <Card key={doctor.id} className="shadow-xs overflow-hidden group relative h-80 cursor-default">
                     Full background image
                     {doctor.image === '/image/default.png' ? (
@@ -413,7 +406,8 @@ export function TeamSection() {
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
+            </div>
+
                 ))}
               </div>
 

@@ -143,8 +143,16 @@ Regulasi mencakup peraturan daerah, peraturan wali kota, dan keputusan internal 
 Dokumen ini memuat ketentuan terkait organisasi, tata kerja, dan aspek pelayanan publik rumah sakit.`,
     features: ['Dasar hukum organisasi', 'Ketentuan tata kerja', 'Ketentuan pelayanan publik', 'Regulasi daerah'],
     downloadHref: '/documents/ppid/perwal.pdf',
-    documentHref: '/document/PERATURAN%20WALIKOTA%20NO%203%20TAHUN%202019.pdf',
-    documentLabel: 'PERATURAN WALIKOTA NO 3 TAHUN 2019',
+    documents: [
+      {
+        href: '/document/PERWAL%20TATA%20KELOLA.pdf',
+        label: 'PERWAL TATA KELOLA',
+      },
+      {
+        href: '/document/PERWAL%20SPM.pdf',
+        label: 'PERWAL SPM',
+      },
+    ],
   },
   {
     id: 'perda',
@@ -200,6 +208,8 @@ LKjIP menjadi salah satu bentuk akuntabilitas rumah sakit kepada publik.`,
 Dokumen ini memberikan gambaran menyeluruh mengenai kinerja rumah sakit kepada masyarakat.`,
     features: ['Ringkasan kinerja tahunan', 'Capaian pelayanan', 'Informasi keuangan', 'Program dan kegiatan rumah sakit'],
     downloadHref: '/documents/ppid/laporan-tahunan.pdf',
+    documentHref: '/document/Laporan%20Tahunan%20RSUD%20H.%20Abdurrahman%20Sayoeti%20Tahun%202025.pdf',
+    documentLabel: 'Laporan Tahunan RSUD H. Abdurrahman Sayoeti Tahun 2025',
   },
 ]
 
