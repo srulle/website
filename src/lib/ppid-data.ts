@@ -152,6 +152,10 @@ Dokumen ini memuat ketentuan terkait organisasi, tata kerja, dan aspek pelayanan
         href: '/document/PERWAL%20SPM.pdf',
         label: 'PERWAL SPM',
       },
+      {
+        href: '/document/PERATURAN%20WALIKOTA%20NO%203%20TAHUN%202019.pdf',
+        label: 'PERATURAN WALIKOTA NO 3 TAHUN 2019',
+      },
     ],
   },
   {
@@ -175,6 +179,16 @@ Dokumen Perda dapat digunakan publik untuk memahami dasar hukum keberadaan dan t
 Dokumen SK Direktur dipublikasikan sesuai ketentuan keterbukaan informasi publik.`,
     features: ['Keputusan direktur', 'Kebijakan internal', 'Penetapan prosedur', 'Dokumen resmi rumah sakit'],
     downloadHref: '/documents/ppid/sk-direktur.pdf',
+    documents: [
+      {
+        href: '/document/SK%20KOMPENSASI.pdf',
+        label: 'SK KOMPENSASI',
+      },
+      {
+        href: '/document/SK%20PENGELOLA%20PENGADUAN.pdf',
+        label: 'SK PENGELOLA PENGADUAN',
+      },
+    ],
   },
   {
     id: 'laporan',

@@ -46,25 +46,25 @@ const leaders = [
   {
     icon: User,
     title: 'Direktur',
-    name: 'dr. Hj. Ade Delpita, Sp.PK',
+    name: 'dr. Ade Delpita, Sp.PK',
     description: 'Memimpin RSUD H. Abdurrahman Sayoeti dengan komitmen tinggi dalam meningkatkan kualitas pelayanan kesehatan masyarakat.'
   },
   {
     icon: Stethoscope,
     title: 'Kasi Pelayanan',
-    name: 'dr. Cicilia MARS',
+    name: 'dr. Cici Lia Nopita, MARS',
     description: 'Bertanggung jawab dalam koordinasi dan pengelolaan seluruh kegiatan pelayanan medis rumah sakit.'
   },
   {
     icon: Building,
     title: 'Kabag Tata Usaha',
-    name: 'Maskur MKM',
+    name: 'Moh. Masykur,SKM',
     description: 'Mengelola administrasi dan ketatausahaan untuk mendukung operasional rumah sakit secara optimal.'
   },
   {
     icon: Heart,
     title: 'Kasi Penunjang',
-    name: 'Amiruddin MKM',
+    name: 'Amiruddin, SKM',
     description: 'Mengkoordinasikan unit penunjang medis untuk menunjang pelayanan kesehatan yang komprehensif.'
   }
 ]
